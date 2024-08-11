@@ -1,11 +1,11 @@
 package chess;
 
-import chess.gui.ApplicationLauncher;
+import chess.gui.ScreenManager;
 import javafx.application.Application;
 
 public class Main {
 
   public static void main(String[] args) {
-    Application.launch(ApplicationLauncher.class, args);
+    Application.launch(ScreenManager.class, args);
   }
 }
