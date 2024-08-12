@@ -4,14 +4,14 @@ public class MatchConfiguration {
 
   private static MatchConfiguration instance;
 
-  private boolean pvp;
-  private boolean whitePlayer;
+  private boolean pvpMode;
+  private boolean playerWhite;
   private int time;
   private int increment;
 
   private MatchConfiguration() {
-    pvp = true;
-    whitePlayer = true;
+    pvpMode = false;
+    playerWhite = true;
     time = Parameters.DEFAULT_TIME;
     increment = Parameters.DEFAULT_INCREMENT;
   }
@@ -23,20 +23,20 @@ public class MatchConfiguration {
     return instance;
   }
 
-  public boolean isPvp() {
-    return pvp;
+  public boolean isPvpMode() {
+    return pvpMode;
   }
 
-  public void setPvp(boolean pvp) {
-    this.pvp = pvp;
+  public void setPvpMode(boolean pvpMode) {
+    this.pvpMode = pvpMode;
   }
 
-  public boolean isWhitePlayer() {
-    return whitePlayer;
+  public boolean isPlayerWhite() {
+    return playerWhite;
   }
 
-  public void setWhitePlayer(boolean whitePlayer) {
-    this.whitePlayer = whitePlayer;
+  public void setPlayerWhite(boolean playerWhite) {
+    this.playerWhite = playerWhite;
   }
 
   public int getTime() {
