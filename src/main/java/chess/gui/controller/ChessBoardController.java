@@ -31,6 +31,10 @@ public class ChessBoardController implements Initializable {
     innerHBox.prefWidthProperty().bind(minLength);
 
     board = new BoardRenderer(grid);
+    board.drawPieces();
+  }
+
+  public void squareClicked(ActionEvent actionEvent) {
   }
 
   public void giveUpClicked(ActionEvent actionEvent) {

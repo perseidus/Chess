@@ -80,322 +80,322 @@
                            <children>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a00" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a20" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a30" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a40" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a50" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="6">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a60" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="7">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a70" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a01" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a11" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a21" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a31" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a41" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="1">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a51" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="6" GridPane.rowIndex="1">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a61" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="7" GridPane.rowIndex="1">
                                  <children>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                    <Button fx:id="a71" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                  </children>
                               </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a02" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a12" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a22" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a32" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a42" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="2">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a52" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="6" GridPane.rowIndex="2">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a62" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="7" GridPane.rowIndex="2">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a72" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="3">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a03" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a13" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a23" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a33" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a43" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="3">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a53" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="6" GridPane.rowIndex="3">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a63" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="7" GridPane.rowIndex="3">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a73" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="4">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a04" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a14" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a24" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="4">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a34" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a44" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="4">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a54" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="6" GridPane.rowIndex="4">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a64" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="7" GridPane.rowIndex="4">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a74" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="5">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a05" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a15" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="5">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a25" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="5">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a35" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="5">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a45" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="5">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a55" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="6" GridPane.rowIndex="5">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a65" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="7" GridPane.rowIndex="5">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a75" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="6">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a06" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a16" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="6">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a26" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="6">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a36" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="6">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a46" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="6">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a56" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="6" GridPane.rowIndex="6">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a66" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="7" GridPane.rowIndex="6">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a76" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="7">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a07" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a17" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="7">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a27" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="7">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a37" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="7">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a47" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="5" GridPane.rowIndex="7">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a57" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="6" GridPane.rowIndex="7">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a67" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="7" GridPane.rowIndex="7">
                                <children>
-                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" StackPane.alignment="CENTER" />
+                                 <Button fx:id="a77" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" StackPane.alignment="CENTER" />
                                </children>
                              </StackPane>
                            </children>

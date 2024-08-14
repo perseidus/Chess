@@ -2,15 +2,18 @@ package chess.game;
 
 public class Piece {
 
-  private boolean whitePiece;
+  private final String color;
+  private boolean firstMove;
   private PieceType type;
 
-  public boolean isWhitePiece() {
-    return whitePiece;
+  public Piece(String color, PieceType type) {
+    this.color = color;
+    this.type = type;
+    firstMove = true;
   }
 
-  public void setWhitePiece(boolean whitePiece) {
-    this.whitePiece = whitePiece;
+  public String getColor() {
+    return color;
   }
 
   public PieceType getType() {
@@ -19,5 +22,9 @@ public class Piece {
 
   public void setType(PieceType type) {
     this.type = type;
+  }
+
+  public void setFirstMove(boolean firstMove) {
+    this.firstMove = firstMove;
   }
 }

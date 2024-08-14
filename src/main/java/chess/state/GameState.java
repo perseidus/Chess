@@ -1,5 +1,6 @@
 package chess.state;
 
+import chess.game.MoveValidator;
 import chess.game.Piece;
 
 public class GameState {
@@ -12,21 +13,26 @@ public class GameState {
   private int blackTime;
   private boolean whiteTurn;
 
-  private GameState () {
+  private GameState() {
     matchConfiguration = MatchConfiguration.getInstance();
   }
 
-  public static GameState getInstance () {
-    if (instance == null){
+  public static GameState getInstance() {
+    if (instance == null) {
       instance = new GameState();
     }
     return instance;
   }
 
-  public void loadMatchConfiguration(){
+  public void loadMatchConfiguration() {
     whiteTime = matchConfiguration.getTime();
     blackTime = matchConfiguration.getTime();
     whiteTurn = true;
+    board = MoveValidator.setUpBoard();
+  }
+
+  public Piece[][] getBoard() {
+    return board;
   }
 
   public int getWhiteTime() {
