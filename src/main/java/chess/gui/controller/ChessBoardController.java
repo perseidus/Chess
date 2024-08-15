@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 
 public class ChessBoardController implements Initializable {
 
-  private BoardRenderer board;
+  private BoardRenderer renderer;
 
   @FXML
   GridPane grid;
@@ -30,15 +30,15 @@ public class ChessBoardController implements Initializable {
     innerHBox.prefHeightProperty().bind(minLength);
     innerHBox.prefWidthProperty().bind(minLength);
 
-    board = new BoardRenderer(grid);
-    board.drawPieces();
+    renderer = new BoardRenderer(grid);
+    renderer.drawPieces();
   }
 
   public void squareClicked(ActionEvent actionEvent) {
   }
 
   public void giveUpClicked(ActionEvent actionEvent) {
-
+    renderer.flipBoard();
   }
 
   public void settingsClicked(ActionEvent actionEvent) {
