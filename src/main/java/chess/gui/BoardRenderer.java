@@ -43,6 +43,8 @@ public class BoardRenderer {
         if (piece != null) {
           image = images.get("a" + j + i);
           image.setImage(new Image(piece.getType().getPath() + piece.getColor() + ".png"));
+          image.fitWidthProperty().bind(buttons.get("a" + j + i).widthProperty());
+          image.fitHeightProperty().bind(buttons.get("a" + j + i).heightProperty());
         }
       }
     }

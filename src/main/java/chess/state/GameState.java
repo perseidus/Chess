@@ -1,6 +1,6 @@
 package chess.state;
 
-import chess.game.MoveValidator;
+import chess.game.MoveGenerator;
 import chess.game.Piece;
 
 public class GameState {
@@ -11,7 +11,7 @@ public class GameState {
   private Piece[][] board;
   private int whiteTime;
   private int blackTime;
-  private boolean whiteTurn;
+  private String colorToTurn;
 
   private GameState() {
     matchConfiguration = MatchConfiguration.getInstance();
@@ -27,8 +27,8 @@ public class GameState {
   public void loadMatchConfiguration() {
     whiteTime = matchConfiguration.getTime();
     blackTime = matchConfiguration.getTime();
-    whiteTurn = true;
-    board = MoveValidator.setUpBoard();
+    colorToTurn = "white";
+    board = MoveGenerator.setUpBoard();
   }
 
   public Piece[][] getBoard() {
@@ -43,7 +43,7 @@ public class GameState {
     return blackTime;
   }
 
-  public boolean isWhiteTurn() {
-    return whiteTurn;
+  public String getColorToTurn() {
+    return colorToTurn;
   }
 }
