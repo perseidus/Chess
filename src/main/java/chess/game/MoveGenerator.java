@@ -41,7 +41,6 @@ public class MoveGenerator {
     return pieces;
   }
 
-  // TODO returns all possible moves for all pieces for the current player
   public static HashMap<String, List<Move>> getPossibleMoves(Piece[][] pieces) {
     MoveGenerator.pieces = pieces;
     colorToTurn = GameState.getInstance().getColorToTurn();
@@ -49,12 +48,29 @@ public class MoveGenerator {
 
     setEnemyAttackedSquares();
 
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        Piece piece = pieces[i][j];
+        if (piece != null && piece.getColor().equals(colorToTurn)) {
+          getMoveForPiece(piece, true);
+          List<Move> moveForPiece = getMoveForPiece(piece, false);
+          moves.put("" + i + j, moveForPiece);
+        }
+      }
+    }
+
     return moves;
   }
 
-  // TODO fills enemyAttacksSquare
   private static void setEnemyAttackedSquares() {
-    //for each piece in pieces: getMoveForPiece(Piece, true)
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        Piece piece = pieces[i][j];
+        if (piece != null && !piece.getColor().equals(colorToTurn)) {
+          getMoveForPiece(piece, true);
+        }
+      }
+    }
   }
 
   private static List<Move> getMoveForPiece(Piece piece, boolean enemyPiece) {
@@ -81,8 +97,8 @@ public class MoveGenerator {
     }
     if (enemyPiece) {
       boolean[][] pieceAttacksSquare = movesToBitboard(moves);
-      for (int i = 0; i < 7; i++) {
-        for (int j = 0; j < 7; j++) {
+      for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
           if (pieceAttacksSquare[i][j]) {
             enemyAttacksSquare[i][j] = true;
           }
@@ -92,11 +108,15 @@ public class MoveGenerator {
     return moves;
   }
 
-  // TODO receives moves and returns the bitboard representation of said moves
   public static boolean[][] movesToBitboard(List<Move> moves) {
-    return null;
+    boolean[][] pieceAttacksSquare = new boolean[7][7];
+    for (Move move : moves) {
+      pieceAttacksSquare[move.getTo()[0]][move.getTo()[1]] = true;
+    }
+    return pieceAttacksSquare;
   }
 
+  //TODO
   private static List<Move> getPawnMoves(Piece piece) {
     return null;
   }
