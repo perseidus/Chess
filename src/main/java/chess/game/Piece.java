@@ -31,6 +31,10 @@ public class Piece {
     this.type = type;
   }
 
+  public boolean isFirstMove() {
+    return firstMove;
+  }
+
   public void setFirstMove(boolean firstMove) {
     this.firstMove = firstMove;
   }
