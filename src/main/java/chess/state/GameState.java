@@ -1,6 +1,6 @@
 package chess.state;
 
-import chess.game.MoveGenerator;
+import chess.game.BoardGenerator;
 import chess.game.Piece;
 
 public class GameState {
@@ -28,7 +28,7 @@ public class GameState {
     whiteTime = matchConfiguration.getTime();
     blackTime = matchConfiguration.getTime();
     colorToTurn = "white";
-    board = MoveGenerator.setUpBoard();
+    board = BoardGenerator.setUpBoard();
   }
 
   public Piece[][] getBoard() {
