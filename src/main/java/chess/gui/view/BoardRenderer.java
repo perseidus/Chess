@@ -1,6 +1,6 @@
-package chess.gui;
+package chess.gui.view;
 
-import chess.game.Piece;
+import chess.game.logic.Piece;
 import chess.state.GameState;
 import java.util.HashMap;
 import javafx.scene.Node;

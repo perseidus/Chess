@@ -1,4 +1,4 @@
-package chess.gui;
+package chess.gui.view;
 
 public enum Screen {
   START("/Start.fxml"),

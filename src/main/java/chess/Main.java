@@ -1,6 +1,6 @@
 package chess;
 
-import chess.gui.ScreenManager;
+import chess.gui.controller.ScreenManager;
 import javafx.application.Application;
 
 public class Main {

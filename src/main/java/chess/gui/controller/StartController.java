@@ -1,7 +1,6 @@
 package chess.gui.controller;
 
-import chess.gui.Screen;
-import chess.gui.ScreenManager;
+import chess.gui.view.Screen;
 import chess.state.MatchConfiguration;
 import javafx.event.ActionEvent;
 

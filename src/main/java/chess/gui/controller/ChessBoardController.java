@@ -1,6 +1,6 @@
 package chess.gui.controller;
 
-import chess.gui.BoardRenderer;
+import chess.gui.view.BoardRenderer;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;

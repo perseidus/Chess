@@ -1,4 +1,4 @@
-package chess.game;
+package chess.game.logic;
 
 public class Piece {
 

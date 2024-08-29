@@ -1,5 +1,6 @@
-package chess.gui;
+package chess.gui.controller;
 
+import chess.gui.view.Screen;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,8 +1,8 @@
 package chess.state;
 
-import chess.game.BoardGenerator;
-import chess.game.Move;
-import chess.game.Piece;
+import chess.game.engine.BoardGenerator;
+import chess.game.logic.Move;
+import chess.game.logic.Piece;
 
 public class GameState {
 

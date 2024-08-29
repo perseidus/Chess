@@ -1,4 +1,4 @@
-package chess.game;
+package chess.game.logic;
 
 public enum SpecialMoveType {
   EN_PASSANT,

@@ -1,5 +1,9 @@
-package chess.game;
+package chess.game.engine;
 
+import chess.game.logic.Move;
+import chess.game.logic.Piece;
+import chess.game.logic.PieceType;
+import chess.game.logic.SpecialMoveType;
 import chess.state.GameState;
 import java.util.ArrayList;
 import java.util.Arrays;
