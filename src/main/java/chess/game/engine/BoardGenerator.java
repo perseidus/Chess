@@ -4,6 +4,8 @@ import chess.game.logic.Move;
 import chess.game.logic.Piece;
 import chess.game.logic.PieceType;
 import chess.game.logic.SpecialMoveType;
+import java.util.HashMap;
+import java.util.List;
 
 public class BoardGenerator {
 
@@ -54,6 +56,46 @@ public class BoardGenerator {
       }
     }
 
+    return pieces;
+  }
+
+  public static boolean[][] movesToBitboard(HashMap<String, List<Move>> moves) {
+    boolean[][] pieceAttacksSquare = new boolean[8][8];
+    for (List<Move> movesForPiece : moves.values()) {
+      for (Move move : movesForPiece) {
+        pieceAttacksSquare[move.getTo()[0]][move.getTo()[1]] = true;
+      }
+    }
+    return pieceAttacksSquare;
+  }
+
+  public static boolean[][] movesToBitboard(List<Move> moves) {
+    boolean[][] pieceAttacksSquare = new boolean[8][8];
+    for (Move move : moves) {
+      pieceAttacksSquare[move.getTo()[0]][move.getTo()[1]] = true;
+    }
+    return pieceAttacksSquare;
+  }
+
+  public static boolean[][] getEnemyPosBitboard(Piece[][] pieces, String colorToTurn) {
+    boolean[][] enemyPiece = new boolean[8][8];
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        if (pieces[i][j] != null && !pieces[i][j].getColor().equals(colorToTurn)) {
+          enemyPiece[i][j] = true;
+        }
+      }
+    }
+    return enemyPiece;
+  }
+
+  public static Piece[][] flipBoard(Piece[][] pieces) {
+    Piece[] tmp;
+    for (int i = 0, j = 7; i < 4; i++, j--) {
+      tmp = pieces[i];
+      pieces[i] = pieces[j];
+      pieces[j] = tmp;
+    }
     return pieces;
   }
 }

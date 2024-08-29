@@ -50,11 +50,11 @@ public class BoardRenderer {
     }
   }
 
-  public void drawPossibleMoves (boolean[][] possibleMove, boolean[][] squareNotEmpty) {
+  public void drawPossibleMoves(boolean[][] possibleMove, boolean[][] enemySquare) {
     String id;
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
-        if (possibleMove[i][j] && squareNotEmpty[i][j]) {
+        if (possibleMove[i][j] && enemySquare[i][j]) {
           id = "a" + j + i;
           buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
         } else if (possibleMove[i][j]) {
@@ -65,14 +65,10 @@ public class BoardRenderer {
     }
   }
 
-  public void flipBoard() {
-    Piece[] tmp;
-    for (int i = 0, j = 7; i < 4; i++, j--) {
-      tmp = pieces[i];
-      pieces[i] = pieces[j];
-      pieces[j] = tmp;
+  public void removePossibleMoves() {
+    for (Button button : buttons.values()) {
+      button.setGraphic(null);
     }
-    drawPieces();
   }
 
   public void refresh() {

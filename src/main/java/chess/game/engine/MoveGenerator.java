@@ -53,7 +53,7 @@ public class MoveGenerator {
         }
       }
     }
-    return movesToBitboard(moves);
+    return BoardGenerator.movesToBitboard(moves);
   }
 
   private static List<Move> getMoveForPiece(Piece[][] pieces, int i, int j, boolean enemyPiece) {
@@ -85,16 +85,6 @@ public class MoveGenerator {
       moves = removeIllegalMoves(pieces, moves);
     }
     return moves;
-  }
-
-  public static boolean[][] movesToBitboard(HashMap<String, List<Move>> moves) {
-    boolean[][] pieceAttacksSquare = new boolean[8][8];
-    for (List<Move> movesForPiece : moves.values()) {
-      for (Move move : movesForPiece) {
-        pieceAttacksSquare[move.getTo()[0]][move.getTo()[1]] = true;
-      }
-    }
-    return pieceAttacksSquare;
   }
 
   //removes move if it leaves own king in check
