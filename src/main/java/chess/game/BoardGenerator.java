@@ -31,10 +31,24 @@ public class BoardGenerator {
     return pieces;
   }
 
-  //TODO sets board up after promotion, castle or en passant
-  public static Piece[][] getBoardAfterSpecialMove(Piece[][] pieces, Move move){
+  public static Piece[][] getBoardAfterMove(Piece[][] pieces, Move move) {
 
-    return null;
+    pieces[move.getTo()[0]][move.getTo()[1]] = pieces[move.getFrom()[0]][move.getFrom()[1]];
+    pieces[move.getFrom()[0]][move.getFrom()[1]] = null;
+
+    if (move.getMoveType() == SpecialMoveType.EN_PASSANT) {     //remove enemy pawn
+      pieces[move.getTo()[0] + 1][move.getTo()[1]] = null;
+
+    } else if (move.getMoveType() == SpecialMoveType.CASTLE) {  //move rook from (right/left)
+      if (move.getFrom()[1] < move.getTo()[1]) {
+        pieces[move.getTo()[0]][move.getTo()[1] - 1] = pieces[move.getTo()[0]][7];
+        pieces[move.getTo()[0]][7] = null;
+      } else {
+        pieces[move.getTo()[0]][move.getTo()[1] + 1] = pieces[move.getTo()[0]][0];
+        pieces[move.getTo()[0]][0] = null;
+      }
+    }
+
+    return pieces;
   }
-
 }

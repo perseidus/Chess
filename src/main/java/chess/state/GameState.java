@@ -1,6 +1,7 @@
 package chess.state;
 
 import chess.game.BoardGenerator;
+import chess.game.Move;
 import chess.game.Piece;
 
 public class GameState {
@@ -12,6 +13,8 @@ public class GameState {
   private int whiteTime;
   private int blackTime;
   private String colorToTurn;
+  private Move lastWhiteMove;
+  private Move lastBlackMove;
 
   private GameState() {
     matchConfiguration = MatchConfiguration.getInstance();
@@ -45,5 +48,20 @@ public class GameState {
 
   public String getColorToTurn() {
     return colorToTurn;
+  }
+
+  public Move getLastWhiteMove() {
+    return lastWhiteMove;
+  }
+
+  public Move getLastBlackMove() {
+    return lastBlackMove;
+  }
+
+  public Move getLastEnemyMove() {
+    if (colorToTurn.equals("white")) {
+      return lastBlackMove;
+    }
+    return lastWhiteMove;
   }
 }

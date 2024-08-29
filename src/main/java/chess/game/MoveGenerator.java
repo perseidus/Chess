@@ -8,17 +8,18 @@ import java.util.List;
 
 public class MoveGenerator {
 
-  private static int[] kingPos;
   private static int[] tempKingPos;
   private static boolean[][] enemyAttackedSquares;
   private static String colorToTurn;
+  private static Move lastEnemyMove;
 
   public static HashMap<String, List<Move>> getPossibleMoves(Piece[][] pieces) {
-    colorToTurn = GameState.getInstance().getColorToTurn();
+    GameState gameState = GameState.getInstance();
+    colorToTurn = gameState.getColorToTurn();
+    lastEnemyMove = gameState.getLastEnemyMove();
     HashMap<String, List<Move>> allMoves = new HashMap<>();
 
     enemyAttackedSquares = getEnemyAttackedSquares(pieces, true);
-    kingPos = new int[]{tempKingPos[0], tempKingPos[1]};
 
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
@@ -92,7 +93,6 @@ public class MoveGenerator {
     return pieceAttacksSquare;
   }
 
-  //TODO check checks for special move types
   //removes move if it leaves own king in check
   private static List<Move> removeIllegalMoves(Piece[][] pieces, List<Move> moves) {
     Piece[][] newPieces = new Piece[8][8];
@@ -102,12 +102,8 @@ public class MoveGenerator {
       for (int i = 0; i < pieces.length; i++) {
         newPieces[i] = Arrays.copyOf(pieces[i], pieces[i].length);
       }
-      if (move.isSpecialMove()){
-        newPieces = BoardGenerator.getBoardAfterSpecialMove(newPieces, move);
-      } else {
-        newPieces[move.getTo()[0]][move.getTo()[1]] = newPieces[move.getFrom()[0]][move.getFrom()[1]];
-        newPieces[move.getFrom()[0]][move.getFrom()[1]] = null;
-      }
+
+      newPieces = BoardGenerator.getBoardAfterMove(newPieces, move);
       attackedSquares = getEnemyAttackedSquares(newPieces, true);
 
       if (attackedSquares[tempKingPos[0]][tempKingPos[1]]) {
@@ -118,11 +114,45 @@ public class MoveGenerator {
     return moves;
   }
 
-  //TODO pawn moves
   private static List<Move> getPawnMoves(Piece[][] pieces, int i, int j) {
     List<Move> moves = new ArrayList<>();
     int[] from = {i, j};
     int moveDir = pieces[i][j].getColor().equals(colorToTurn) ? 1 : -1;
+
+    //double move, en passant (not for enemy pieces), normal move (+ promotion), capturing move (+ promotion)
+    if (pieces[i][j].isFirstMove()
+        && pieces[i - moveDir][j] == null && pieces[i - 2 * moveDir][j] == null) {
+      moves.add(new Move(from, new int[]{i - 2 * moveDir, j}, SpecialMoveType.DOUBLE_PAWN));
+    }
+    if (lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN && moveDir == 1
+        && lastEnemyMove.getTo()[0] == i && lastEnemyMove.getTo()[1] == j - 1) {
+      moves.add(new Move(from, new int[]{i - moveDir, j - 1}, SpecialMoveType.EN_PASSANT));
+    }
+    if (lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN && moveDir == 1
+        && lastEnemyMove.getTo()[0] == i && lastEnemyMove.getTo()[1] == j + 1) {
+      moves.add(new Move(from, new int[]{i - moveDir, j + 1}, SpecialMoveType.EN_PASSANT));
+    }
+    if (pieces[i - moveDir][j] == null) {
+      if (i - moveDir == 7 || i - moveDir == 0) {
+        moves.add(new Move(from, new int[]{i - moveDir, j}, SpecialMoveType.PROMOTION));
+      } else {
+        moves.add(new Move(from, new int[]{i - moveDir, j}));
+      }
+    }
+    if (j - 1 >= 0 && !pieces[i - moveDir][j - 1].getColor().equals(colorToTurn)) {
+      if (i - moveDir == 7 || i - moveDir == 0) {
+        moves.add(new Move(from, new int[]{i - moveDir, j - 1}, SpecialMoveType.PROMOTION));
+      } else {
+        moves.add(new Move(from, new int[]{i - moveDir, j - 1}));
+      }
+    }
+    if (j + 1 <= 7 && !pieces[i - moveDir][j + 1].getColor().equals(colorToTurn)) {
+      if (i - moveDir == 7 || i - moveDir == 0) {
+        moves.add(new Move(from, new int[]{i - moveDir, j + 1}, SpecialMoveType.PROMOTION));
+      } else {
+        moves.add(new Move(from, new int[]{i - moveDir, j + 1}));
+      }
+    }
 
     return moves;
   }

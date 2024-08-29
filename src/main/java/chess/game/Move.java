@@ -32,4 +32,8 @@ public class Move {
   public boolean isSpecialMove() {
     return specialMove;
   }
+
+  public SpecialMoveType getMoveType() {
+    return moveType;
+  }
 }
