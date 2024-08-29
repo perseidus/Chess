@@ -18,6 +18,8 @@ public class GameState {
 
   private GameState() {
     matchConfiguration = MatchConfiguration.getInstance();
+    lastWhiteMove = new Move(new int[]{1,1}, new int[]{0,0});   //dummy move
+    lastBlackMove = new Move(new int[]{1,1}, new int[]{0,0});   //dummy move
   }
 
   public static GameState getInstance() {
@@ -63,5 +65,13 @@ public class GameState {
       return lastBlackMove;
     }
     return lastWhiteMove;
+  }
+
+  public void changeTurn () {
+    if (colorToTurn.equals("white")) {
+      colorToTurn = "black";
+    } else {
+      colorToTurn = "white";
+    }
   }
 }

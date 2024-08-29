@@ -50,6 +50,21 @@ public class BoardRenderer {
     }
   }
 
+  public void drawPossibleMoves (boolean[][] possibleMove, boolean[][] squareNotEmpty) {
+    String id;
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        if (possibleMove[i][j] && squareNotEmpty[i][j]) {
+          id = "a" + j + i;
+          buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
+        } else if (possibleMove[i][j]) {
+          id = "a" + j + i;
+          buttons.get(id).setGraphic(NodeFactory.getSmallCircle(images.get(id)));
+        }
+      }
+    }
+  }
+
   public void flipBoard() {
     Piece[] tmp;
     for (int i = 0, j = 7; i < 4; i++, j--) {

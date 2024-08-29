@@ -143,14 +143,16 @@ public class MoveGenerator {
         moves.add(new Move(from, new int[]{i - moveDir, j}));
       }
     }
-    if (j - 1 >= 0 && !pieces[i - moveDir][j - 1].getColor().equals(colorToTurn)) {
+    if (j - 1 >= 0 && pieces[i - moveDir][j - 1] != null
+        && !pieces[i - moveDir][j - 1].getColor().equals(colorToTurn)) {
       if (i - moveDir == 7 || i - moveDir == 0) {
         moves.add(new Move(from, new int[]{i - moveDir, j - 1}, SpecialMoveType.PROMOTION));
       } else {
         moves.add(new Move(from, new int[]{i - moveDir, j - 1}));
       }
     }
-    if (j + 1 <= 7 && !pieces[i - moveDir][j + 1].getColor().equals(colorToTurn)) {
+    if (j + 1 <= 7 && pieces[i - moveDir][j + 1] != null
+        && !pieces[i - moveDir][j + 1].getColor().equals(colorToTurn)) {
       if (i - moveDir == 7 || i - moveDir == 0) {
         moves.add(new Move(from, new int[]{i - moveDir, j + 1}, SpecialMoveType.PROMOTION));
       } else {
@@ -358,7 +360,10 @@ public class MoveGenerator {
       moves.add(new Move(from, new int[]{i - 1, j + 1}));
     }
 
-    //castling moves, right + left
+    //castling moves, right + left (not for enemy pieces)
+    if (!pieces[i][j].getColor().equals(colorToTurn)) {
+      return moves;
+    }
     if (pieces[i][j].isFirstMove() && !enemyAttackedSquares[i][j]) {
       if (pieces[7][7].isFirstMove()
           && pieces[i][j + 1] == null && pieces[i][j + 2] == null && pieces[7][6] == null
