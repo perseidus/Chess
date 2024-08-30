@@ -111,18 +111,21 @@ public class MoveGenerator {
   private static List<Move> getPawnMoves(Piece[][] pieces, int i, int j) {
     List<Move> moves = new ArrayList<>();
     int[] from = {i, j};
-    int moveDir = pieces[i][j].getColor().equals(colorToTurn) ? 1 : -1;
+    int moveDirWhite = GameState.getInstance().getMoveDirWhite();
+    int moveDir = pieces[i][j].getColor().equals("white") ? moveDirWhite : moveDirWhite * -1;
 
     //double move, en passant (not for enemy pieces), normal move (+ promotion), capturing move (+ promotion)
     if (pieces[i][j].isFirstMove()
         && pieces[i - moveDir][j] == null && pieces[i - 2 * moveDir][j] == null) {
       moves.add(new Move(from, new int[]{i - 2 * moveDir, j}, SpecialMoveType.DOUBLE_PAWN));
     }
-    if (lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN && moveDir == 1
+    if (lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN
+        && pieces[i][j].getColor().equals(colorToTurn)
         && lastEnemyMove.getTo()[0] == i && lastEnemyMove.getTo()[1] == j - 1) {
       moves.add(new Move(from, new int[]{i - moveDir, j - 1}, SpecialMoveType.EN_PASSANT));
     }
-    if (lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN && moveDir == 1
+    if (lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN
+        && pieces[i][j].getColor().equals(colorToTurn)
         && lastEnemyMove.getTo()[0] == i && lastEnemyMove.getTo()[1] == j + 1) {
       moves.add(new Move(from, new int[]{i - moveDir, j + 1}, SpecialMoveType.EN_PASSANT));
     }
