@@ -358,12 +358,12 @@ public class MoveGenerator {
       return moves;
     }
     if (pieces[i][j].isFirstMove() && !enemyAttackedSquares[i][j]) {
-      if (pieces[7][7].isFirstMove()
+      if (pieces[7][7] != null && pieces[7][7].isFirstMove()
           && pieces[i][j + 1] == null && pieces[i][j + 2] == null && pieces[7][6] == null
           && !enemyAttackedSquares[i][j + 1] && !enemyAttackedSquares[i][j + 2]) {
         moves.add(new Move(from, new int[]{i, j + 2}, SpecialMoveType.CASTLE));
       }
-      if (pieces[7][0].isFirstMove()
+      if (pieces[7][0] != null && pieces[7][0].isFirstMove()
           && pieces[i][j - 1] == null && pieces[i][j - 2] == null && pieces[7][1] == null
           && !enemyAttackedSquares[i][j - 1] && !enemyAttackedSquares[i][j - 2]) {
         moves.add(new Move(from, new int[]{i, j - 2}, SpecialMoveType.CASTLE));

@@ -10,8 +10,6 @@ public class GameState {
 
   private MatchConfiguration matchConfiguration;
   private Piece[][] board;
-  private int whiteTime;
-  private int blackTime;
   private String colorToTurn;
   private int moveDirWhite;
   private Move lastWhiteMove;
@@ -31,14 +29,18 @@ public class GameState {
   }
 
   public void loadMatchConfiguration() {
-    whiteTime = matchConfiguration.getTime();
-    blackTime = matchConfiguration.getTime();
     colorToTurn = "white";
     board = BoardGenerator.setUpBoard();
+
     if (matchConfiguration.isPlayerWhiteAtStart()) {
       moveDirWhite = 1;
     } else {
       moveDirWhite = -1;
+    }
+
+    if (!matchConfiguration.isPvpMode() && !matchConfiguration.isPlayerWhiteAtStart()) {
+      moveDirWhite *= -1;
+      board = BoardGenerator.flipBoard(board);
     }
   }
 
@@ -59,12 +61,8 @@ public class GameState {
     return board;
   }
 
-  public int getWhiteTime() {
-    return whiteTime;
-  }
-
-  public int getBlackTime() {
-    return blackTime;
+  public void setBoard(Piece[][] board) {
+    this.board = board;
   }
 
   public String getColorToTurn() {
@@ -73,6 +71,14 @@ public class GameState {
 
   public Move getLastWhiteMove() {
     return lastWhiteMove;
+  }
+
+  public void setLastWhiteMove(Move lastWhiteMove) {
+    this.lastWhiteMove = lastWhiteMove;
+  }
+
+  public void setLastBlackMove(Move lastBlackMove) {
+    this.lastBlackMove = lastBlackMove;
   }
 
   public Move getLastBlackMove() {

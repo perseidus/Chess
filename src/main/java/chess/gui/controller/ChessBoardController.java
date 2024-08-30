@@ -35,7 +35,6 @@ public class ChessBoardController implements Initializable {
 
     renderer = new BoardRenderer(grid);
     manager = new BoardInteractionManager(renderer);
-    renderer.drawPieces();
   }
 
   public void squareClicked(ActionEvent actionEvent) {

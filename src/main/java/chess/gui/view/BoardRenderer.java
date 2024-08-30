@@ -45,6 +45,8 @@ public class BoardRenderer {
           image.setImage(new Image(piece.getType().getPath() + piece.getColor() + ".png"));
           image.fitWidthProperty().bind(buttons.get("a" + j + i).widthProperty());
           image.fitHeightProperty().bind(buttons.get("a" + j + i).heightProperty());
+        } else {
+          images.get("a" + j + i).setImage(null);
         }
       }
     }
@@ -72,7 +74,8 @@ public class BoardRenderer {
   }
 
   public void refresh() {
-    gridPane.getChildren();
+    removePossibleMoves();
+    drawPieces();
   }
 
 }

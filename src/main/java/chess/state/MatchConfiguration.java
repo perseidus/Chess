@@ -41,10 +41,6 @@ public class MatchConfiguration {
     return playerWhiteAtStart;
   }
 
-  public void setPlayerWhiteAtStart(boolean playerWhiteAtStart) {
-    this.playerWhiteAtStart = playerWhiteAtStart;
-  }
-
   public int getTime() {
     return time;
   }
@@ -77,6 +73,10 @@ public class MatchConfiguration {
     this.selectedColorButton = selectedColorButton;
     if (!pvpMode && selectedColorButton == 1) {
       playerWhiteAtStart = Math.random() < 0.5;
+    } else if (!pvpMode && selectedColorButton == 2) {
+      playerWhiteAtStart = false;
+    } else {
+      playerWhiteAtStart = true;
     }
   }
 }
