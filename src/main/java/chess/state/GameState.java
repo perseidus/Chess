@@ -36,7 +36,6 @@ public class GameState {
     colorToTurn = "white";
     board = BoardGenerator.setUpBoard();
     if (matchConfiguration.isPlayerWhiteAtStart()) {
-      colorToTurn = "white";
       moveDirWhite = 1;
     } else {
       moveDirWhite = -1;
