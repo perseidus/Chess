@@ -75,7 +75,14 @@ public class BoardInteractionManager {
     }
 
     if (possibleMoves[i][j]) {
-      gameSession.sendMove(selectedPiecePos, new int[]{i, j});
+      Move move = null;
+      List<Move> listOfMoves = moves.get("" + selectedPiecePos[0] + selectedPiecePos[1]);
+      for (Move m : listOfMoves) {          // search clicked move
+        if (m.getTo()[0] == i && m.getTo()[1] == j) {
+          move = m;
+        }
+      }
+      gameSession.sendMove(move);
     }
   }
 

@@ -79,9 +79,9 @@ public class GameSession extends Thread {
     }
   }
 
-  public void sendMove(int[] from, int[] to) {
-    Move move = new Move(from, to);
+  public void sendMove(Move move) {
     gameState.setBoard(BoardGenerator.getBoardAfterMove(pieces, move));
+    gameState.resetFirstMove(move.getTo()[0], move.getTo()[1]);
     gameState.changeTurn();
     manager.refresh();
 

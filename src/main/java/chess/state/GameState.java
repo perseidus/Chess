@@ -57,6 +57,10 @@ public class GameState {
     }
   }
 
+  public void resetFirstMove(int i, int j) {
+    board[i][j].setFirstMove(false);
+  }
+
   public Piece[][] getBoard() {
     return board;
   }

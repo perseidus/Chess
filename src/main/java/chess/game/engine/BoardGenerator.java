@@ -96,6 +96,14 @@ public class BoardGenerator {
       pieces[i] = pieces[j];
       pieces[j] = tmp;
     }
+    Piece temp;
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0, k = 7; j < 4; j++, k--) {
+        temp = pieces[i][j];
+        pieces[i][j] = pieces[i][k];
+        pieces[i][k] = temp;
+      }
+    }
     return pieces;
   }
 }

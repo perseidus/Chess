@@ -8,6 +8,7 @@ import chess.state.GameState;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class MoveGenerator {
@@ -92,7 +93,10 @@ public class MoveGenerator {
     Piece[][] newPieces = new Piece[8][8];
     boolean[][] attackedSquares;
 
-    for (Move move : moves) {
+    Iterator<Move> iterator = moves.iterator();
+
+    while (iterator.hasNext()) {
+      Move move = iterator.next();
       for (int i = 0; i < pieces.length; i++) {
         newPieces[i] = Arrays.copyOf(pieces[i], pieces[i].length);
       }
@@ -101,7 +105,7 @@ public class MoveGenerator {
       attackedSquares = getEnemyAttackedSquares(newPieces, true);
 
       if (attackedSquares[tempKingPos[0]][tempKingPos[1]]) {
-        moves.remove(move);
+        iterator.remove();
       }
     }
 
@@ -121,12 +125,12 @@ public class MoveGenerator {
     }
     if (lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN
         && pieces[i][j].getColor().equals(colorToTurn)
-        && lastEnemyMove.getTo()[0] == i && lastEnemyMove.getTo()[1] == j - 1) {
+        && 7 - lastEnemyMove.getTo()[0] == i && 7 - lastEnemyMove.getTo()[1] == j - 1) {
       moves.add(new Move(from, new int[]{i - moveDir, j - 1}, SpecialMoveType.EN_PASSANT));
     }
     if (lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN
         && pieces[i][j].getColor().equals(colorToTurn)
-        && lastEnemyMove.getTo()[0] == i && lastEnemyMove.getTo()[1] == j + 1) {
+        && 7 - lastEnemyMove.getTo()[0] == i && 7 - lastEnemyMove.getTo()[1] == j + 1) {
       moves.add(new Move(from, new int[]{i - moveDir, j + 1}, SpecialMoveType.EN_PASSANT));
     }
     if (pieces[i - moveDir][j] == null) {
@@ -137,7 +141,7 @@ public class MoveGenerator {
       }
     }
     if (j - 1 >= 0 && pieces[i - moveDir][j - 1] != null
-        && !pieces[i - moveDir][j - 1].getColor().equals(colorToTurn)) {
+        && !pieces[i - moveDir][j - 1].getColor().equals(pieces[i][j].getColor())) {
       if (i - moveDir == 7 || i - moveDir == 0) {
         moves.add(new Move(from, new int[]{i - moveDir, j - 1}, SpecialMoveType.PROMOTION));
       } else {
@@ -145,7 +149,7 @@ public class MoveGenerator {
       }
     }
     if (j + 1 <= 7 && pieces[i - moveDir][j + 1] != null
-        && !pieces[i - moveDir][j + 1].getColor().equals(colorToTurn)) {
+        && !pieces[i - moveDir][j + 1].getColor().equals(pieces[i][j].getColor())) {
       if (i - moveDir == 7 || i - moveDir == 0) {
         moves.add(new Move(from, new int[]{i - moveDir, j + 1}, SpecialMoveType.PROMOTION));
       } else {
@@ -164,7 +168,8 @@ public class MoveGenerator {
     while ((i - count) >= 0) {              //UP
       if (pieces[i - count][j] == null) {   //empty square
         moves.add(new Move(from, new int[]{i - count, j}));
-      } else if (!pieces[i - count][j].getColor().equals(colorToTurn)) {  //enemy pieces square
+      } else if (!pieces[i - count][j].getColor()
+          .equals(pieces[i][j].getColor())) {  //enemy pieces square
         moves.add(new Move(from, new int[]{i - count, j}));
         break;
       } else {    //own pieces square
@@ -177,7 +182,7 @@ public class MoveGenerator {
     while ((j + count) <= 7) {              //RIGHT
       if (pieces[i][j + count] == null) {
         moves.add(new Move(from, new int[]{i, j + count}));
-      } else if (!pieces[i][j + count].getColor().equals(colorToTurn)) {
+      } else if (!pieces[i][j + count].getColor().equals(pieces[i][j].getColor())) {
         moves.add(new Move(from, new int[]{i, j + count}));
         break;
       } else {
@@ -190,7 +195,7 @@ public class MoveGenerator {
     while ((i + count) <= 7) {              //DOWN
       if (pieces[i + count][j] == null) {
         moves.add(new Move(from, new int[]{i + count, j}));
-      } else if (!pieces[i + count][j].getColor().equals(colorToTurn)) {
+      } else if (!pieces[i + count][j].getColor().equals(pieces[i][j].getColor())) {
         moves.add(new Move(from, new int[]{i + count, j}));
         break;
       } else {
@@ -203,7 +208,7 @@ public class MoveGenerator {
     while ((j - count) >= 0) {              //LEFT
       if (pieces[i][j - count] == null) {
         moves.add(new Move(from, new int[]{i, j - count}));
-      } else if (!pieces[i][j - count].getColor().equals(colorToTurn)) {
+      } else if (!pieces[i][j - count].getColor().equals(pieces[i][j].getColor())) {
         moves.add(new Move(from, new int[]{i, j - count}));
         break;
       } else {
@@ -221,35 +226,35 @@ public class MoveGenerator {
 
     //counter-clockwise starting at upper left move
     if ((((i - 2) >= 0) && ((j - 1) >= 0)) && ((pieces[i - 2][j - 1] == null) ||
-        !pieces[i - 2][j - 1].getColor().equals(colorToTurn))) {
+        !pieces[i - 2][j - 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i - 2, j - 1}));
     }
     if ((((i - 1) >= 0) && ((j - 2) >= 0)) && ((pieces[i - 1][j - 2] == null) ||
-        !pieces[i - 1][j - 2].getColor().equals(colorToTurn))) {
+        !pieces[i - 1][j - 2].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i - 1, j - 2}));
     }
     if ((((i + 1) <= 7) && ((j - 2) >= 0)) && ((pieces[i + 1][j - 2] == null) ||
-        !pieces[i + 1][j - 2].getColor().equals(colorToTurn))) {
+        !pieces[i + 1][j - 2].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i + 1, j - 2}));
     }
     if ((((i + 2) <= 7) && ((j - 1) >= 0)) && ((pieces[i + 2][j - 1] == null) ||
-        !pieces[i + 2][j - 1].getColor().equals(colorToTurn))) {
+        !pieces[i + 2][j - 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i + 2, j - 1}));
     }
     if ((((i + 2) <= 7) && ((j + 1) <= 7)) && ((pieces[i + 2][j + 1] == null) ||
-        !pieces[i + 2][j + 1].getColor().equals(colorToTurn))) {
+        !pieces[i + 2][j + 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i + 2, j + 1}));
     }
     if ((((i + 1) <= 7) && ((j + 2) <= 7)) && ((pieces[i + 1][j + 2] == null) ||
-        !pieces[i + 1][j + 2].getColor().equals(colorToTurn))) {
+        !pieces[i + 1][j + 2].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i + 1, j + 2}));
     }
     if ((((i - 1) >= 0) && ((j + 2) <= 7)) && ((pieces[i - 1][j + 2] == null) ||
-        !pieces[i - 1][j + 2].getColor().equals(colorToTurn))) {
+        !pieces[i - 1][j + 2].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i - 1, j + 2}));
     }
     if ((((i - 2) >= 0) && ((j + 1) <= 7)) && ((pieces[i - 2][j + 1] == null) ||
-        !pieces[i - 2][j + 1].getColor().equals(colorToTurn))) {
+        !pieces[i - 2][j + 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i - 2, j + 1}));
     }
 
@@ -264,7 +269,7 @@ public class MoveGenerator {
     while (((i - count) >= 0) && ((j - count) >= 0)) {          //UP-LEFT
       if (pieces[i - count][j - count] == null) {
         moves.add(new Move(from, new int[]{i - count, j - count}));
-      } else if (!pieces[i - count][j - count].getColor().equals(colorToTurn)) {
+      } else if (!pieces[i - count][j - count].getColor().equals(pieces[i][j].getColor())) {
         moves.add(new Move(from, new int[]{i - count, j - count}));
         break;
       } else {
@@ -277,7 +282,7 @@ public class MoveGenerator {
     while (((i - count) >= 0) && ((j + count) <= 7)) {                      //UP-RIGHT
       if (pieces[i - count][j + count] == null) {
         moves.add(new Move(from, new int[]{i - count, j + count}));
-      } else if (!pieces[i - count][j + count].getColor().equals(colorToTurn)) {
+      } else if (!pieces[i - count][j + count].getColor().equals(pieces[i][j].getColor())) {
         moves.add(new Move(from, new int[]{i - count, j + count}));
         break;
       } else {
@@ -290,7 +295,7 @@ public class MoveGenerator {
     while (((i + count) <= 7) && ((j + count) <= 7)) {                      //DOWN-RIGHT
       if (pieces[i + count][j + count] == null) {
         moves.add(new Move(from, new int[]{i + count, j + count}));
-      } else if (!pieces[i + count][j + count].getColor().equals(colorToTurn)) {
+      } else if (!pieces[i + count][j + count].getColor().equals(pieces[i][j].getColor())) {
         moves.add(new Move(from, new int[]{i + count, j + count}));
         break;
       } else {
@@ -303,7 +308,7 @@ public class MoveGenerator {
     while (((i + count) <= 7) && ((j - count) >= 0)) {                      //DOWN-LEFT
       if (pieces[i + count][j - count] == null) {
         moves.add(new Move(from, new int[]{i + count, j - count}));
-      } else if (!pieces[i + count][j - count].getColor().equals(colorToTurn)) {
+      } else if (!pieces[i + count][j - count].getColor().equals(pieces[i][j].getColor())) {
         moves.add(new Move(from, new int[]{i + count, j - count}));
         break;
       } else {
@@ -321,35 +326,35 @@ public class MoveGenerator {
 
     //counter-clockwise starting at top square
     if (((i - 1) >= 0) && ((pieces[i - 1][j] == null) ||
-        !pieces[i - 1][j].getColor().equals(colorToTurn))) {
+        !pieces[i - 1][j].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i - 1, j}));
     }
     if ((((i - 1) >= 0) && ((j - 1) >= 0)) && ((pieces[i - 1][j - 1] == null) ||
-        !pieces[i - 1][j - 1].getColor().equals(colorToTurn))) {
+        !pieces[i - 1][j - 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i - 1, j - 1}));
     }
-    if (((j - 1) >= 7) && ((pieces[i][j - 1] == null) ||
-        !pieces[i][j - 1].getColor().equals(colorToTurn))) {
+    if (((j - 1) <= 7) && ((pieces[i][j - 1] == null) ||
+        !pieces[i][j - 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i, j - 1}));
     }
     if ((((i + 1) <= 7) && ((j - 1) >= 0)) && ((pieces[i + 1][j - 1] == null) ||
-        !pieces[i + 1][j - 1].getColor().equals(colorToTurn))) {
+        !pieces[i + 1][j - 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i + 1, j - 1}));
     }
     if (((i + 1) <= 7) && ((pieces[i + 1][j] == null) ||
-        !pieces[i + 1][j].getColor().equals(colorToTurn))) {
+        !pieces[i + 1][j].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i + 1, j}));
     }
     if ((((i + 1) <= 7) && ((j + 1) <= 7)) && ((pieces[i + 1][j + 1] == null) ||
-        !pieces[i + 1][j + 1].getColor().equals(colorToTurn))) {
+        !pieces[i + 1][j + 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i + 1, j + 1}));
     }
     if (((j + 1) <= 7) && ((pieces[i][j + 1] == null) ||
-        !pieces[i][j + 1].getColor().equals(colorToTurn))) {
+        !pieces[i][j + 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i, j + 1}));
     }
     if ((((i - 1) >= 0) && ((j + 1) <= 7)) && ((pieces[i - 1][j + 1] == null) ||
-        !pieces[i - 1][j + 1].getColor().equals(colorToTurn))) {
+        !pieces[i - 1][j + 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i - 1, j + 1}));
     }
 
