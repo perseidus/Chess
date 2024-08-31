@@ -25,6 +25,8 @@ public class GameSession extends Thread {
   private int whiteInc;     //in seconds
   private int blackInc;     //in seconds
 
+  private long lastSavedTime;
+
   private Piece[][] pieces;
 
   public GameSession(BoardInteractionManager manager) {
@@ -64,18 +66,23 @@ public class GameSession extends Thread {
         }
         try {
           sleep(1000);
-          firstSecond = false;
         } catch (InterruptedException e) {
           throw new RuntimeException(e);
         }
+        firstSecond = false;
+        lastSavedTime = System.currentTimeMillis();
       }
 
       try {
-        sleep(1000);
+        sleep(70);
       } catch (InterruptedException e) {
         throw new RuntimeException(e);
       }
-      deductTime();
+
+      if (System.currentTimeMillis() - lastSavedTime > 1000) {
+        deductTime();
+        lastSavedTime = System.currentTimeMillis();
+      }
     }
   }
 
@@ -83,14 +90,17 @@ public class GameSession extends Thread {
     gameState.setBoard(BoardGenerator.getBoardAfterMove(pieces, move));
     gameState.resetFirstMove(move.getTo()[0], move.getTo()[1]);
     gameState.changeTurn();
-    manager.refresh();
+    lastSavedTime = System.currentTimeMillis();
 
     if (whitePlayerTurn) {
       gameState.setLastWhiteMove(move);
+      whiteTime += whiteInc;
     } else {
+      blackTime += blackInc;
       gameState.setLastBlackMove(move);
     }
     whitePlayerTurn = !whitePlayerTurn;
+    manager.refresh();
 
     if (configs.isPvpMode()) {    //2 human players
       manager.waitForMove();
@@ -116,6 +126,7 @@ public class GameSession extends Thread {
     } else {
       blackTime -= 1;
     }
+    manager.updateClocks(whiteTime, blackTime);
 
     if (whiteTime <= 0 || blackTime <= 0) {
       MatchResultHandler.gameOverTimeOut();
@@ -135,4 +146,11 @@ public class GameSession extends Thread {
     matchRunning = false;
   }
 
+  public int getWhiteTime() {
+    return whiteTime;
+  }
+
+  public int getBlackTime() {
+    return blackTime;
+  }
 }

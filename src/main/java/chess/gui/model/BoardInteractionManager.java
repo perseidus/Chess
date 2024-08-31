@@ -86,8 +86,41 @@ public class BoardInteractionManager {
     }
   }
 
+  public void updateClocks(int whiteTime, int blackTime) {
+    String whiteTimeFormatted = formatTime(whiteTime);
+    String blackTimeFormatted = formatTime(blackTime);
+    if (gameState.getMoveDirWhite() == 1) {
+      renderer.drawClocks(blackTimeFormatted, whiteTimeFormatted);
+    } else {
+      renderer.drawClocks(whiteTimeFormatted, blackTimeFormatted);
+    }
+  }
+
+  public static String formatTime(int totalSeconds) {
+    int firstPart;
+    int secondPart;
+    String format = "%02d:%02d";
+
+    if (totalSeconds >= 3600) {
+      firstPart = totalSeconds / 3600;
+      secondPart = (totalSeconds % 3600) / 60;
+      if (totalSeconds < 36000) {
+        format = "%2d:%02d";
+      }
+    } else {
+      firstPart = totalSeconds / 60;
+      secondPart = totalSeconds % 60;
+      if (totalSeconds < 600) {
+        format = "%2d:%02d";
+      }
+    }
+
+    return String.format(format, firstPart, secondPart);
+  }
+
   public void refresh() {
     resetInputs();
+    updateClocks(gameSession.getWhiteTime(), gameSession.getBlackTime());
     renderer.refresh();
   }
 }

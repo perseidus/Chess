@@ -3,8 +3,10 @@ package chess.gui.view;
 import chess.game.logic.Piece;
 import chess.game.state.GameState;
 import java.util.HashMap;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -19,12 +21,16 @@ public class BoardRenderer {
   private HashMap<String, ImageView> images;
   private Piece[][] pieces;
 
-  public BoardRenderer(GridPane gridPane) {
+  private Label upperTimeLabel, lowerTimeLabel;
+
+  public BoardRenderer(GridPane gridPane, Label upperTimeLabel, Label lowerTimeLabel) {
     this.gridPane = gridPane;
     this.gameState = GameState.getInstance();
     this.pieces = gameState.getBoard();
     this.buttons = new HashMap<>();
     this.images = new HashMap<>();
+    this.upperTimeLabel = upperTimeLabel;
+    this.lowerTimeLabel = lowerTimeLabel;
 
     for (Node node : gridPane.getChildren()) {
       Button button = (Button) ((StackPane) node).getChildren().get(1);
@@ -71,6 +77,16 @@ public class BoardRenderer {
     for (Button button : buttons.values()) {
       button.setGraphic(null);
     }
+  }
+
+  public void drawClocks(String upperClock, String lowerClock) {
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        upperTimeLabel.setText(upperClock);
+        lowerTimeLabel.setText(lowerClock);
+      }
+    });
   }
 
   public void refresh() {

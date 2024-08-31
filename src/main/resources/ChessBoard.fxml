@@ -25,7 +25,7 @@
                 <Insets left="10.0" top="10.0" />
               </VBox.margin></Button>
             <Label maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="60.0" text="00:00" VBox.vgrow="SOMETIMES">
+            <Label fx:id="upperTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="60.0" text="00:00" VBox.vgrow="SOMETIMES">
               <VBox.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
               </VBox.margin>
@@ -34,7 +34,7 @@
               </font>
             </Label>
             <Label maxHeight="1.7976931348623157E308" minHeight="50.0" VBox.vgrow="SOMETIMES" />
-            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="60.0" text="00:00" VBox.vgrow="SOMETIMES">
+            <Label fx:id="lowerTimeLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="60.0" text="00:00" VBox.vgrow="SOMETIMES">
               <VBox.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
               </VBox.margin>
