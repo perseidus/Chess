@@ -4,7 +4,7 @@ import chess.game.logic.Move;
 import chess.game.logic.Piece;
 import chess.game.logic.PieceType;
 import chess.game.logic.SpecialMoveType;
-import chess.state.GameState;
+import chess.game.state.GameState;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

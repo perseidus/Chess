@@ -1,9 +1,9 @@
 package chess.gui.controller;
 
 import chess.gui.view.Screen;
-import chess.state.GameState;
-import chess.state.MatchConfiguration;
-import chess.state.Parameters;
+import chess.game.state.GameState;
+import chess.game.state.MatchConfiguration;
+import chess.game.state.Parameters;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;

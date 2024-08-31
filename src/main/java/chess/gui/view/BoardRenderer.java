@@ -1,7 +1,7 @@
 package chess.gui.view;
 
 import chess.game.logic.Piece;
-import chess.state.GameState;
+import chess.game.state.GameState;
 import java.util.HashMap;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

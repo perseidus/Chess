@@ -1,6 +1,6 @@
 package chess.gui.view;
 
-import chess.state.Parameters;
+import chess.game.state.Parameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;

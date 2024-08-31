@@ -17,8 +17,8 @@ public class ScreenManager extends Application {
     ScreenManager.stage = stage;
     switchScene(Screen.START);
 
-    stage.setMinHeight(chess.state.Parameters.minScreenHeight);
-    stage.setMinWidth(chess.state.Parameters.minScreenWidth);
+    stage.setMinHeight(chess.game.state.Parameters.minScreenHeight);
+    stage.setMinWidth(chess.game.state.Parameters.minScreenWidth);
     stage.show();
   }
 

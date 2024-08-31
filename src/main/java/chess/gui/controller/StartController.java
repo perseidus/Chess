@@ -1,7 +1,7 @@
 package chess.gui.controller;
 
 import chess.gui.view.Screen;
-import chess.state.MatchConfiguration;
+import chess.game.state.MatchConfiguration;
 import javafx.event.ActionEvent;
 
 public class StartController {

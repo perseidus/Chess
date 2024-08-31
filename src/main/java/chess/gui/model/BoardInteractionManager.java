@@ -6,7 +6,7 @@ import chess.game.engine.GameSession;
 import chess.game.logic.Move;
 import chess.game.logic.Piece;
 import chess.gui.view.BoardRenderer;
-import chess.state.GameState;
+import chess.game.state.GameState;
 import java.util.HashMap;
 import java.util.List;
 

@@ -5,8 +5,8 @@ import chess.ai.StandardAI;
 import chess.game.logic.Move;
 import chess.game.logic.Piece;
 import chess.gui.model.BoardInteractionManager;
-import chess.state.GameState;
-import chess.state.MatchConfiguration;
+import chess.game.state.GameState;
+import chess.game.state.MatchConfiguration;
 
 public class GameSession extends Thread {
 
@@ -95,12 +95,19 @@ public class GameSession extends Thread {
     if (configs.isPvpMode()) {    //2 human players
       manager.waitForMove();
     } else if (playerTurn) {      //ai moves next
-      ai.getMove();
       playerTurn = false;
+      ai.getMove();
     } else {                      //human moves next
-      manager.waitForMove();
       playerTurn = true;
+      manager.waitForMove();
     }
+  }
+
+  public void sendAIMove(Move move) {
+    if (playerTurn) {
+      return;
+    }
+    sendMove(move);
   }
 
   private void deductTime() {
@@ -119,7 +126,7 @@ public class GameSession extends Thread {
   private void createComputerPlayer() {
     switch (configs.getComputer()) {
       case "Standard":
-        this.ai = new StandardAI();
+        this.ai = new StandardAI(this);
         break;
     }
   }

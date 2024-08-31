@@ -1,4 +1,4 @@
-package chess.state;
+package chess.game.state;
 
 public class MatchConfiguration {
 

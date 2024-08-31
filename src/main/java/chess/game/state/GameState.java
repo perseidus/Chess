@@ -1,4 +1,4 @@
-package chess.state;
+package chess.game.state;
 
 import chess.game.engine.BoardGenerator;
 import chess.game.logic.Move;
@@ -39,7 +39,7 @@ public class GameState {
     }
 
     if (!matchConfiguration.isPvpMode() && !matchConfiguration.isPlayerWhiteAtStart()) {
-      moveDirWhite *= -1;
+      moveDirWhite = -1;
       board = BoardGenerator.flipBoard(board);
     }
   }
