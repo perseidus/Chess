@@ -39,7 +39,7 @@ public class MoveGenerator {
     return allMoves;
   }
 
-  private static boolean[][] getEnemyAttackedSquares(Piece[][] pieces, boolean setTempKingPos) {
+  public static boolean[][] getEnemyAttackedSquares(Piece[][] pieces, boolean setTempKingPos) {
     HashMap<String, List<Move>> moves = new HashMap<>();
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
@@ -376,5 +376,13 @@ public class MoveGenerator {
     }
 
     return moves;
+  }
+
+  public static void switchColors() {
+    if (colorToTurn.equals("white")) {
+      colorToTurn = "black";
+    } else {
+      colorToTurn = "white";
+    }
   }
 }

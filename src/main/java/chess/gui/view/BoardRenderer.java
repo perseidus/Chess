@@ -58,25 +58,54 @@ public class BoardRenderer {
     }
   }
 
-  public void drawPossibleMoves(boolean[][] possibleMove, boolean[][] enemySquare) {
-    String id;
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
-        if (possibleMove[i][j] && enemySquare[i][j]) {
-          id = "a" + j + i;
-          buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
-        } else if (possibleMove[i][j]) {
-          id = "a" + j + i;
-          buttons.get(id).setGraphic(NodeFactory.getSmallCircle(images.get(id)));
+  public void drawChecks() {
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        String id;
+        if (gameState.isBlackKingInCheck()) {
+          int[] blackKing = gameState.getBlackKingPos();
+          id = "a" + blackKing[1] + blackKing[0];
+          buttons.get(id).setGraphic(NodeFactory.getCheckHighlight(images.get(id)));
+        }
+        if (gameState.isWhiteKingInCheck()) {
+          int[] whiteKing = gameState.getWhiteKingPos();
+          id = "a" + whiteKing[1] + whiteKing[0];
+          buttons.get(id).setGraphic(NodeFactory.getCheckHighlight(images.get(id)));
         }
       }
-    }
+    });
   }
 
-  public void removePossibleMoves() {
-    for (Button button : buttons.values()) {
-      button.setGraphic(null);
-    }
+  public void drawPossibleMoves(boolean[][] possibleMove, boolean[][] enemySquare) {
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        String id;
+        for (int i = 0; i < 8; i++) {
+          for (int j = 0; j < 8; j++) {
+            if (possibleMove[i][j] && enemySquare[i][j]) {
+              id = "a" + j + i;
+              buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
+            } else if (possibleMove[i][j]) {
+              id = "a" + j + i;
+              buttons.get(id).setGraphic(NodeFactory.getSmallCircle(images.get(id)));
+            }
+          }
+        }
+      }
+    });
+  }
+
+  public void removeButtonGraphics() {
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        for (Button button : buttons.values()) {
+          button.setGraphic(null);
+        }
+      }
+    });
   }
 
   public void drawClocks(String upperClock, String lowerClock) {
@@ -90,8 +119,9 @@ public class BoardRenderer {
   }
 
   public void refresh() {
-    removePossibleMoves();
+    removeButtonGraphics();
     drawPieces();
+    drawChecks();
   }
 
 }

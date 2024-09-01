@@ -91,6 +91,8 @@ public class GameSession extends Thread {
     gameState.resetFirstMove(move.getTo()[0], move.getTo()[1]);
     gameState.changeTurn();
     lastSavedTime = System.currentTimeMillis();
+    MatchResultHandler.calculateKingsPos(gameState.getBoard());
+    MatchResultHandler.calculateKingsInCheck(gameState.getBoard());
 
     if (whitePlayerTurn) {
       gameState.setLastWhiteMove(move);

@@ -12,13 +12,17 @@ public class GameState {
   private Piece[][] board;
   private String colorToTurn;
   private int moveDirWhite;
-  private Move lastWhiteMove;
-  private Move lastBlackMove;
+
+  private Move lastWhiteMove, lastBlackMove;
+  private int[] whiteKingPos, blackKingPos;
+  private boolean whiteKingInCheck, blackKingInCheck;
 
   private GameState() {
     matchConfiguration = MatchConfiguration.getInstance();
     lastWhiteMove = new Move(new int[]{1, 1}, new int[]{0, 0});   //dummy move
     lastBlackMove = new Move(new int[]{1, 1}, new int[]{0, 0});   //dummy move
+    whiteKingInCheck = false;
+    blackKingInCheck = false;
   }
 
   public static GameState getInstance() {
@@ -98,5 +102,41 @@ public class GameState {
 
   public int getMoveDirWhite() {
     return moveDirWhite;
+  }
+
+  public static void setInstance(GameState instance) {
+    GameState.instance = instance;
+  }
+
+  public int[] getWhiteKingPos() {
+    return whiteKingPos;
+  }
+
+  public void setWhiteKingPos(int[] whiteKingPos) {
+    this.whiteKingPos = whiteKingPos;
+  }
+
+  public int[] getBlackKingPos() {
+    return blackKingPos;
+  }
+
+  public void setBlackKingPos(int[] blackKingPos) {
+    this.blackKingPos = blackKingPos;
+  }
+
+  public boolean isWhiteKingInCheck() {
+    return whiteKingInCheck;
+  }
+
+  public void setWhiteKingInCheck(boolean whiteKingInCheck) {
+    this.whiteKingInCheck = whiteKingInCheck;
+  }
+
+  public boolean isBlackKingInCheck() {
+    return blackKingInCheck;
+  }
+
+  public void setBlackKingInCheck(boolean blackKingInCheck) {
+    this.blackKingInCheck = blackKingInCheck;
   }
 }

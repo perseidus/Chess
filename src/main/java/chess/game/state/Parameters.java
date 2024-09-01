@@ -20,4 +20,5 @@ public interface Parameters {
   public static final List<String> COMPUTERS = Arrays.asList("Standard");
 
   public static Color moveHighlightColor = Color.FORESTGREEN;
+  public static Color checkHighlightColor = Color.INDIANRED;
 }

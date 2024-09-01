@@ -48,7 +48,7 @@ public class BoardInteractionManager {
   }
 
   public void handleButtonClick(int i, int j) {
-    if (!gameSession.isPlayerTurn()){
+    if (!gameSession.isPlayerTurn()) {
       return;
     }
 
@@ -65,7 +65,7 @@ public class BoardInteractionManager {
     pieceSelected = true;
     possibleMoves = BoardGenerator.movesToBitboard(selectedPieceMoves);
     boolean[][] enemySquare = BoardGenerator.getEnemyPosBitboard(pieces, pieces[i][j].getColor());
-    renderer.removePossibleMoves();
+    renderer.removeButtonGraphics();
     renderer.drawPossibleMoves(possibleMoves, enemySquare);
   }
 
