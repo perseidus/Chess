@@ -174,22 +174,54 @@ public class MatchResultHandler {
   }
 
 
-  //TODO decisive: if opponent has sufficient material; draw: king vs anything
-  public static MatchResult gameOverTimeOut() {
+  //decisive: if opponent has sufficient material; draw: king vs anything
+  public static MatchResult gameOverTimeOut(String opponentColor) {
+    MatchResult result;
+    Material opponent = calculateMaterial(GameState.getInstance().getBoard(), opponentColor);
 
-    return null;
+    if (opponent.getOtherPiecesCount() > 0) {   //opponent has sufficient material
+      if (opponentColor.equals("white")) {
+        result = MatchResult.WHITE_WINS;
+      } else {
+        result = MatchResult.BLACK_WINS;
+      }
+      result.setMessage("by time-out");
+      return result;
+    }
+
+    if ((opponent.getBishopCount() <= 1 && opponent.getKnightCount() == 0)   //insufficient material
+        || (opponent.getBishopCount() == 0 && opponent.getKnightCount() <= 1)) {
+      result = MatchResult.DRAW;
+      result.setMessage("by insufficient material");
+      return result;
+    }
+
+    if (opponentColor.equals("white")) {    //else: opponent has sufficient material
+      result = MatchResult.WHITE_WINS;
+    } else {
+      result = MatchResult.BLACK_WINS;
+    }
+    result.setMessage("by time-out");
+    return result;
   }
 
-  //TODO decisive
-  public static MatchResult gameOverForfeit() {
-
-    return null;
+  //decisive: resignation
+  public static MatchResult gameOverResignation(String resigningColor) {
+    MatchResult result;
+    if (resigningColor.equals("white")) {
+      result = MatchResult.BLACK_WINS;
+    } else {
+      result = MatchResult.WHITE_WINS;
+    }
+    result.setMessage("by resignation");
+    return result;
   }
 
-  //TODO draw agreement
+  //draw agreement
   public static MatchResult gameOverDrawAgreement() {
-
-    return null;
+    MatchResult result = MatchResult.DRAW;
+    result.setMessage("by agreement");
+    return result;
   }
 
   public static void calculateKingsPos(Piece[][] pieces) {

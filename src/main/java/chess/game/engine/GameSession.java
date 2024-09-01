@@ -98,6 +98,7 @@ public class GameSession extends Thread {
     MatchResult result = MatchResultHandler.checkIfMatchEnded();
     if (result != MatchResult.ONGOING) {
       endSession(result);
+      return;
     }
 
     if (whitePlayerTurn) {
@@ -123,7 +124,7 @@ public class GameSession extends Thread {
   }
 
   public void sendAIMove(Move move) {
-    if (playerTurn) {
+    if (playerTurn || !matchRunning) {
       return;
     }
     sendMove(move);
@@ -138,7 +139,8 @@ public class GameSession extends Thread {
     manager.updateClocks(whiteTime, blackTime);
 
     if (whiteTime <= 0 || blackTime <= 0) {
-      MatchResult result = MatchResultHandler.gameOverTimeOut();
+      String opponentColor = whiteTime <= 0 ? "black" : "white";
+      MatchResult result = MatchResultHandler.gameOverTimeOut(opponentColor);
       endSession(result);
     }
   }
@@ -151,10 +153,20 @@ public class GameSession extends Thread {
     }
   }
 
+  //TODO match ended in draw, win, loss
   public void endSession(MatchResult result) {
-    //TODO match ended in draw, win, loss
-    System.out.println("ENDE");
+    String primaryMessage;
+    String secondaryMessage = result.getMessage();
+    if (result == MatchResult.WHITE_WINS) {
+      primaryMessage = "White wins";
+    } else if (result == MatchResult.BLACK_WINS) {
+      primaryMessage = "Black wins";
+    } else {
+      primaryMessage = "Draw";
+    }
+
     matchRunning = false;
+    playerTurn = false;
   }
 
   public int getWhiteTime() {
