@@ -103,6 +103,7 @@ public class GameSession extends Thread {
     manager.refresh();
 
     if (configs.isPvpMode()) {    //2 human players
+      playerTurn = true;
       manager.waitForMove();
     } else if (playerTurn) {      //ai moves next
       playerTurn = false;
@@ -152,5 +153,9 @@ public class GameSession extends Thread {
 
   public int getBlackTime() {
     return blackTime;
+  }
+
+  public boolean isPlayerTurn() {
+    return playerTurn;
   }
 }

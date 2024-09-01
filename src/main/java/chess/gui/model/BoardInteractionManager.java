@@ -15,7 +15,6 @@ public class BoardInteractionManager {
   private BoardRenderer renderer;
   private GameState gameState;
   private GameSession gameSession;
-  private RedrawManager redrawManager;
 
   private Piece[][] pieces;
   private boolean pieceSelected;
@@ -31,9 +30,7 @@ public class BoardInteractionManager {
     this.moves = MoveGenerator.getPossibleMoves(pieces);
     renderer.drawPieces();
 
-    this.redrawManager = new RedrawManager();
     this.gameSession = new GameSession(this);
-    redrawManager.start();
     gameSession.start();
   }
 
@@ -51,6 +48,9 @@ public class BoardInteractionManager {
   }
 
   public void handleButtonClick(int i, int j) {
+    if (!gameSession.isPlayerTurn()){
+      return;
+    }
 
     if (pieces[i][j] != null && pieces[i][j].getColor().equals(gameState.getColorToTurn())) {
       friendlySquareClicked(i, j);
