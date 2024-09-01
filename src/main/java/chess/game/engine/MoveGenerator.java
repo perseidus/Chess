@@ -101,7 +101,7 @@ public class MoveGenerator {
         newPieces[i] = Arrays.copyOf(pieces[i], pieces[i].length);
       }
 
-      newPieces = BoardGenerator.getBoardAfterMove(newPieces, move);
+      newPieces = BoardGenerator.getBoardAfterMove(newPieces, move, false);
       attackedSquares = getEnemyAttackedSquares(newPieces, true);
 
       if (attackedSquares[tempKingPos[0]][tempKingPos[1]]) {

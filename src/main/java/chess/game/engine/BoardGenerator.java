@@ -38,7 +38,11 @@ public class BoardGenerator {
     return pieces;
   }
 
-  public static Piece[][] getBoardAfterMove(Piece[][] pieces, Move move) {
+  public static Piece[][] getBoardAfterMove(Piece[][] pieces, Move move, boolean setCapture) {
+
+    if (setCapture && pieces[move.getTo()[0]][move.getTo()[1]] != null){
+      move.setCapturingMove(true);
+    }
 
     pieces[move.getTo()[0]][move.getTo()[1]] = pieces[move.getFrom()[0]][move.getFrom()[1]];
     pieces[move.getFrom()[0]][move.getFrom()[1]] = null;

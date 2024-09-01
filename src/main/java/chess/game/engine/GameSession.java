@@ -4,6 +4,7 @@ import chess.ai.AI;
 import chess.ai.StandardAI;
 import chess.game.logic.Move;
 import chess.game.logic.Piece;
+import chess.game.state.MatchResult;
 import chess.gui.model.BoardInteractionManager;
 import chess.game.state.GameState;
 import chess.game.state.MatchConfiguration;
@@ -87,12 +88,17 @@ public class GameSession extends Thread {
   }
 
   public void sendMove(Move move) {
-    gameState.setBoard(BoardGenerator.getBoardAfterMove(pieces, move));
-    gameState.resetFirstMove(move.getTo()[0], move.getTo()[1]);
+    gameState.setBoard(BoardGenerator.getBoardAfterMove(pieces, move, true));
+    gameState.handleMove(move);
     gameState.changeTurn();
     lastSavedTime = System.currentTimeMillis();
+
     MatchResultHandler.calculateKingsPos(gameState.getBoard());
     MatchResultHandler.calculateKingsInCheck(gameState.getBoard());
+    MatchResult result = MatchResultHandler.checkIfMatchEnded();
+    if (result != MatchResult.ONGOING) {
+      endSession(result);
+    }
 
     if (whitePlayerTurn) {
       gameState.setLastWhiteMove(move);
@@ -132,8 +138,8 @@ public class GameSession extends Thread {
     manager.updateClocks(whiteTime, blackTime);
 
     if (whiteTime <= 0 || blackTime <= 0) {
-      MatchResultHandler.gameOverTimeOut();
-      endSession();
+      MatchResult result = MatchResultHandler.gameOverTimeOut();
+      endSession(result);
     }
   }
 
@@ -145,7 +151,9 @@ public class GameSession extends Thread {
     }
   }
 
-  public void endSession() {
+  public void endSession(MatchResult result) {
+    //TODO match ended in draw, win, loss
+    System.out.println("ENDE");
     matchRunning = false;
   }
 

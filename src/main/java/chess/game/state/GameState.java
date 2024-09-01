@@ -3,6 +3,7 @@ package chess.game.state;
 import chess.game.engine.BoardGenerator;
 import chess.game.logic.Move;
 import chess.game.logic.Piece;
+import chess.game.logic.PieceType;
 
 public class GameState {
 
@@ -17,12 +18,10 @@ public class GameState {
   private int[] whiteKingPos, blackKingPos;
   private boolean whiteKingInCheck, blackKingInCheck;
 
+  private int count50move;
+
   private GameState() {
-    matchConfiguration = MatchConfiguration.getInstance();
-    lastWhiteMove = new Move(new int[]{1, 1}, new int[]{0, 0});   //dummy move
-    lastBlackMove = new Move(new int[]{1, 1}, new int[]{0, 0});   //dummy move
-    whiteKingInCheck = false;
-    blackKingInCheck = false;
+    loadMatchConfiguration();
   }
 
   public static GameState getInstance() {
@@ -33,6 +32,12 @@ public class GameState {
   }
 
   public void loadMatchConfiguration() {
+    matchConfiguration = MatchConfiguration.getInstance();
+    lastWhiteMove = new Move(new int[]{1, 1}, new int[]{0, 0});   //dummy move
+    lastBlackMove = new Move(new int[]{1, 1}, new int[]{0, 0});   //dummy move
+    whiteKingInCheck = false;
+    blackKingInCheck = false;
+    count50move = 0;
     colorToTurn = "white";
     board = BoardGenerator.setUpBoard();
 
@@ -61,8 +66,18 @@ public class GameState {
     }
   }
 
-  public void resetFirstMove(int i, int j) {
-    board[i][j].setFirstMove(false);
+  public void handleMove(Move move) {
+    Piece moved = board[move.getTo()[0]][move.getTo()[1]];
+    moved.setFirstMove(false);
+    if (move.isCapturingMove() || moved.getType() == PieceType.PAWN){
+      count50move = 0;
+    } else {
+      count50move++;
+    }
+  }
+
+  public int getCount50move() {
+    return count50move;
   }
 
   public Piece[][] getBoard() {
@@ -75,6 +90,13 @@ public class GameState {
 
   public String getColorToTurn() {
     return colorToTurn;
+  }
+
+  public boolean isColorToTurnInCheck() {
+    if (colorToTurn.equals("white")) {
+      return whiteKingInCheck;
+    }
+    return blackKingInCheck;
   }
 
   public Move getLastWhiteMove() {
@@ -102,10 +124,6 @@ public class GameState {
 
   public int getMoveDirWhite() {
     return moveDirWhite;
-  }
-
-  public static void setInstance(GameState instance) {
-    GameState.instance = instance;
   }
 
   public int[] getWhiteKingPos() {

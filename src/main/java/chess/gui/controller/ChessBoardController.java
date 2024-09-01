@@ -51,6 +51,10 @@ public class ChessBoardController implements Initializable {
     manager.handleButtonClick(id.charAt(2) - '0', id.charAt(1) - '0');
   }
 
+  public void drawClicked(ActionEvent actionEvent) {
+
+  }
+
   public void giveUpClicked(ActionEvent actionEvent) {
 
   }
