@@ -88,6 +88,15 @@ public class GameSession extends Thread {
   }
 
   public void sendMove(Move move) {
+    if (whitePlayerTurn) {
+      gameState.setLastWhiteMove(move);
+      whiteTime += whiteInc;
+    } else {
+      blackTime += blackInc;
+      gameState.setLastBlackMove(move);
+    }
+    whitePlayerTurn = !whitePlayerTurn;
+
     gameState.setBoard(BoardGenerator.getBoardAfterMove(pieces, move, true));
     gameState.handleMove(move);
     gameState.changeTurn();
@@ -101,14 +110,6 @@ public class GameSession extends Thread {
       return;
     }
 
-    if (whitePlayerTurn) {
-      gameState.setLastWhiteMove(move);
-      whiteTime += whiteInc;
-    } else {
-      blackTime += blackInc;
-      gameState.setLastBlackMove(move);
-    }
-    whitePlayerTurn = !whitePlayerTurn;
     manager.refresh();
 
     if (configs.isPvpMode()) {    //2 human players

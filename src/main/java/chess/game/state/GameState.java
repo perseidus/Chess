@@ -14,7 +14,7 @@ public class GameState {
   private String colorToTurn;
   private int moveDirWhite;
 
-  private Move lastWhiteMove, lastBlackMove;
+  private Move lastWhiteMove, lastBlackMove, lastMove;
   private int[] whiteKingPos, blackKingPos;
   private boolean whiteKingInCheck, blackKingInCheck;
 
@@ -33,8 +33,9 @@ public class GameState {
 
   public void loadMatchConfiguration() {
     matchConfiguration = MatchConfiguration.getInstance();
-    lastWhiteMove = new Move(new int[]{1, 1}, new int[]{0, 0});   //dummy move
-    lastBlackMove = new Move(new int[]{1, 1}, new int[]{0, 0});   //dummy move
+    lastWhiteMove = null;   //dummy move
+    lastBlackMove = null;   //dummy move
+    lastMove = null;        //dummy move
     whiteKingInCheck = false;
     blackKingInCheck = false;
     count50move = 0;
@@ -61,6 +62,9 @@ public class GameState {
     }
 
     if (matchConfiguration.isPvpMode()) {
+      if (lastMove != null) {
+        lastMove.flipCoords();
+      }
       moveDirWhite *= -1;
       board = BoardGenerator.flipBoard(board);
     }
@@ -69,7 +73,7 @@ public class GameState {
   public void handleMove(Move move) {
     Piece moved = board[move.getTo()[0]][move.getTo()[1]];
     moved.setFirstMove(false);
-    if (move.isCapturingMove() || moved.getType() == PieceType.PAWN){
+    if (move.isCapturingMove() || moved.getType() == PieceType.PAWN) {
       count50move = 0;
     } else {
       count50move++;
@@ -99,20 +103,18 @@ public class GameState {
     return blackKingInCheck;
   }
 
-  public Move getLastWhiteMove() {
-    return lastWhiteMove;
+  public Move getLastMove() {
+    return lastMove;
   }
 
   public void setLastWhiteMove(Move lastWhiteMove) {
     this.lastWhiteMove = lastWhiteMove;
+    this.lastMove = lastWhiteMove;
   }
 
   public void setLastBlackMove(Move lastBlackMove) {
     this.lastBlackMove = lastBlackMove;
-  }
-
-  public Move getLastBlackMove() {
-    return lastBlackMove;
+    this.lastMove = lastBlackMove;
   }
 
   public Move getLastEnemyMove() {

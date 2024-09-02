@@ -123,12 +123,12 @@ public class MoveGenerator {
         && pieces[i - moveDir][j] == null && pieces[i - 2 * moveDir][j] == null) {
       moves.add(new Move(from, new int[]{i - 2 * moveDir, j}, SpecialMoveType.DOUBLE_PAWN));
     }
-    if (lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN
+    if (lastEnemyMove != null && lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN
         && pieces[i][j].getColor().equals(colorToTurn)
         && 7 - lastEnemyMove.getTo()[0] == i && 7 - lastEnemyMove.getTo()[1] == j - 1) {
       moves.add(new Move(from, new int[]{i - moveDir, j - 1}, SpecialMoveType.EN_PASSANT));
     }
-    if (lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN
+    if (lastEnemyMove != null && lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN
         && pieces[i][j].getColor().equals(colorToTurn)
         && 7 - lastEnemyMove.getTo()[0] == i && 7 - lastEnemyMove.getTo()[1] == j + 1) {
       moves.add(new Move(from, new int[]{i - moveDir, j + 1}, SpecialMoveType.EN_PASSANT));

@@ -33,7 +33,7 @@ public class NodeFactory {
     Circle circle = new Circle();
     circle.radiusProperty().bind(imageView.fitHeightProperty().divide(2.5));
 
-    RadialGradient gradient = new RadialGradient(0, 0, 0.5, 1, 1, true, CycleMethod.NO_CYCLE,
+    RadialGradient gradient = new RadialGradient(0, 0, 0.5, 0.1, 1, true, CycleMethod.NO_CYCLE,
         new Stop(0, Parameters.checkHighlightColor),
         new Stop(0.85, Color.TRANSPARENT));
 

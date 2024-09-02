@@ -66,7 +66,7 @@ public class BoardInteractionManager {
     possibleMoves = BoardGenerator.movesToBitboard(selectedPieceMoves);
     boolean[][] enemySquare = BoardGenerator.getEnemyPosBitboard(pieces, pieces[i][j].getColor());
     renderer.removeButtonGraphics();
-    renderer.drawPossibleMoves(possibleMoves, enemySquare);
+    renderer.drawPossibleMoves(possibleMoves, enemySquare, i, j);
   }
 
   private void emptyOrEnemySquareClicked(int i, int j) {

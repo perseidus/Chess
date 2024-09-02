@@ -1,7 +1,9 @@
 package chess.gui.view;
 
+import chess.game.logic.Move;
 import chess.game.logic.Piece;
 import chess.game.state.GameState;
+import chess.game.state.Parameters;
 import java.util.HashMap;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -77,7 +79,7 @@ public class BoardRenderer {
     });
   }
 
-  public void drawPossibleMoves(boolean[][] possibleMove, boolean[][] enemySquare) {
+  public void drawPossibleMoves(boolean[][] possibleMove, boolean[][] enemySquare, int x, int y) {
     Platform.runLater(new Runnable() {
       @Override
       public void run() {
@@ -93,6 +95,33 @@ public class BoardRenderer {
             }
           }
         }
+        id = "a" + y + x;
+        drawLastMove(true, id);
+        buttons.get(id).setStyle("-fx-background-color: " + Parameters.moveToColor + ";");
+      }
+    });
+  }
+
+  public void drawLastMove(boolean pieceSelected, String id) {
+    Move lastMove = gameState.getLastMove();
+    if (lastMove == null) {
+      return;
+    }
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        for (Button button : buttons.values()) {
+          button.setStyle("-fx-background-color: transparent;");
+        }
+
+        buttons.get("a" + lastMove.getFrom()[1] + lastMove.getFrom()[0])
+            .setStyle("-fx-background-color: " + Parameters.moveFromColor + ";");
+        buttons.get("a" + lastMove.getTo()[1] + lastMove.getTo()[0])
+            .setStyle("-fx-background-color: " + Parameters.moveToColor + ";");
+
+        if (pieceSelected) {
+          buttons.get(id).setStyle("-fx-background-color: " + Parameters.moveToColor + ";");
+        }
       }
     });
   }
@@ -103,6 +132,7 @@ public class BoardRenderer {
       public void run() {
         for (Button button : buttons.values()) {
           button.setGraphic(null);
+          button.setStyle("-fx-background-color: transparent;");
         }
       }
     });
@@ -121,6 +151,7 @@ public class BoardRenderer {
   public void refresh() {
     removeButtonGraphics();
     drawPieces();
+    drawLastMove(false, "");
     drawChecks();
   }
 

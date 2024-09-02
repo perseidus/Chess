@@ -21,4 +21,6 @@ public interface Parameters {
 
   public static Color moveHighlightColor = Color.FORESTGREEN;
   public static Color checkHighlightColor = Color.INDIANRED;
+  public static String moveFromColor = "rgba(189, 205, 148, 0.25)";
+  public static String moveToColor = "rgba(155, 170, 105, 0.25)";
 }
