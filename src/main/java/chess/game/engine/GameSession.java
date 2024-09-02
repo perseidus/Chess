@@ -8,6 +8,8 @@ import chess.game.state.MatchResult;
 import chess.gui.model.BoardInteractionManager;
 import chess.game.state.GameState;
 import chess.game.state.MatchConfiguration;
+import chess.sound.Sound;
+import chess.sound.SoundPlayer;
 
 public class GameSession extends Thread {
 
@@ -15,6 +17,7 @@ public class GameSession extends Thread {
   private BoardInteractionManager manager;
   private MatchConfiguration configs;
   private AI ai;
+  private SoundPlayer soundPlayer;
 
   private boolean matchRunning;
   private boolean playerTurn;
@@ -35,6 +38,7 @@ public class GameSession extends Thread {
     this.gameState = GameState.getInstance();
     this.manager = manager;
     this.configs = MatchConfiguration.getInstance();
+    this.soundPlayer = SoundPlayer.getInstance();
     this.firstSecond = true;
     this.matchRunning = true;
     this.whitePlayerTurn = true;
@@ -88,6 +92,7 @@ public class GameSession extends Thread {
   }
 
   public void sendMove(Move move) {
+    soundPlayer.playSound(Sound.MOVE);
     if (whitePlayerTurn) {
       gameState.setLastWhiteMove(move);
       whiteTime += whiteInc;

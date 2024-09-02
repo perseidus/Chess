@@ -1,6 +1,8 @@
 package chess.gui.controller;
 
 import chess.gui.view.Screen;
+import chess.sound.Sound;
+import chess.sound.SoundPlayer;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +25,7 @@ public class ScreenManager extends Application {
   }
 
   public static void switchScene(Screen screen) {
+    SoundPlayer.getInstance().playSound(Sound.CLICK);
     try {
       Parent root = FXMLLoader.load(ScreenManager.class.getResource(screen.getPath()));
       Scene scene = new Scene(root);
