@@ -5,6 +5,7 @@ import chess.game.engine.MoveGenerator;
 import chess.game.engine.GameSession;
 import chess.game.logic.Move;
 import chess.game.logic.Piece;
+import chess.game.state.MatchConfiguration;
 import chess.gui.view.BoardRenderer;
 import chess.game.state.GameState;
 import java.util.HashMap;
@@ -116,6 +117,10 @@ public class BoardInteractionManager {
     }
 
     return String.format(format, firstPart, secondPart);
+  }
+
+  public void giveUp() {
+    gameSession.giveUp();
   }
 
   public void refresh() {

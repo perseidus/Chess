@@ -4,6 +4,8 @@ import chess.gui.view.Screen;
 import chess.game.state.GameState;
 import chess.game.state.MatchConfiguration;
 import chess.game.state.Parameters;
+import chess.sound.Sound;
+import chess.sound.SoundPlayer;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -63,6 +65,7 @@ public class ChooseGameController implements Initializable {
     saveChanges();
     GameState.getInstance().loadMatchConfiguration();
     ScreenManager.switchScene(Screen.CHESSBOARD);
+    SoundPlayer.getInstance().playSound(Sound.CLICK);
   }
 
   public void saveChanges() {

@@ -5,6 +5,7 @@ import chess.ai.StandardAI;
 import chess.game.logic.Move;
 import chess.game.logic.Piece;
 import chess.game.state.MatchResult;
+import chess.gui.controller.ScreenManager;
 import chess.gui.model.BoardInteractionManager;
 import chess.game.state.GameState;
 import chess.game.state.MatchConfiguration;
@@ -23,6 +24,8 @@ public class GameSession extends Thread {
   private boolean playerTurn;
   private boolean whitePlayerTurn;
   private boolean firstSecond;
+  public static String primaryMessage;
+  public static String secondaryMessage;
 
   private int whiteTime;    //in seconds
   private int blackTime;    //in seconds
@@ -159,10 +162,19 @@ public class GameSession extends Thread {
     }
   }
 
+  public void giveUp() {
+    if (configs.isPvpMode()) {
+      String color = whitePlayerTurn ? "white" : "black";
+      endSession(MatchResultHandler.gameOverResignation(color));
+    } else {
+      String color = configs.isPlayerWhiteAtStart() ? "white" : "black";
+      endSession(MatchResultHandler.gameOverResignation(color));
+    }
+  }
+
   //TODO match ended in draw, win, loss
   public void endSession(MatchResult result) {
-    String primaryMessage;
-    String secondaryMessage = result.getMessage();
+    secondaryMessage = result.getMessage();
     if (result == MatchResult.WHITE_WINS) {
       primaryMessage = "White wins";
     } else if (result == MatchResult.BLACK_WINS) {
@@ -173,6 +185,7 @@ public class GameSession extends Thread {
 
     matchRunning = false;
     playerTurn = false;
+    ScreenManager.openMatchEndingPopUp();
   }
 
   public int getWhiteTime() {

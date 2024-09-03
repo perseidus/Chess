@@ -1,9 +1,11 @@
 package chess.gui.view;
 
 public enum Screen {
-  START("/Start.fxml"),
-  CHOOSEGAME("/ChooseGame.fxml"),
-  CHESSBOARD("/ChessBoard.fxml");
+  START("/fxml/Start.fxml"),
+  CHOOSEGAME("/fxml/ChooseGame.fxml"),
+  CHESSBOARD("/fxml/ChessBoard.fxml"),
+  MATCHENDING("/fxml/MatchEndedPopUp.fxml"),
+  ;
 
   private String path;
 
