@@ -5,6 +5,7 @@ public enum Screen {
   CHOOSEGAME("/fxml/ChooseGame.fxml"),
   CHESSBOARD("/fxml/ChessBoard.fxml"),
   MATCHENDING("/fxml/MatchEndedPopUp.fxml"),
+  SETTINGS_POPOVER("/fxml/SettingsPopOver.fxml"),
   ;
 
   private String path;

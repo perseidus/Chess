@@ -1,5 +1,7 @@
 package chess.gui.controller;
 
+import chess.gui.view.PopOn;
+import chess.gui.view.PopOnType;
 import chess.gui.view.Screen;
 import chess.game.state.GameState;
 import chess.game.state.MatchConfiguration;
@@ -11,10 +13,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import org.controlsfx.control.PopOver;
+import org.controlsfx.control.PopOver.ArrowLocation;
 
 public class ChooseGameController implements Initializable {
 
@@ -26,6 +31,8 @@ public class ChooseGameController implements Initializable {
   Label computerLabel, colonLabel3;
   @FXML
   ComboBox<String> timeBox, incrementBox, computerBox;
+  @FXML
+  Button settingsButton;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,9 +58,14 @@ public class ChooseGameController implements Initializable {
   }
 
   public void settingsClicked(ActionEvent actionEvent) {
+    PopOver popOver = PopOn.getInstance(PopOnType.SETTINGS);
+    popOver.setArrowLocation(ArrowLocation.TOP_LEFT);
+    popOver.setDetachable(false);
+    popOver.show(settingsButton);
   }
 
   public void themeClicked(ActionEvent actionEvent) {
+    ScreenManager.switchTheme();
   }
 
   public void backClicked(ActionEvent actionEvent) {

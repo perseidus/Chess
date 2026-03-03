@@ -78,7 +78,7 @@ public class MatchResultHandler {
   }
 
   private static String convertPositionToString(Piece[][] pieces) {
-    StringBuilder sb = new StringBuilder("");
+    StringBuilder sb = new StringBuilder();
     boolean boardFlipped = false;
     if (GameState.getInstance().getMoveDirWhite() == -1) {
       pieces = BoardGenerator.flipBoard(pieces);
@@ -89,24 +89,50 @@ public class MatchResultHandler {
         if (pieces[i][j] == null) {
           sb.append('0');
         } else {
+          boolean white = pieces[i][j].isWhite();
+
           switch (pieces[i][j].getType()) {
             case KNIGHT:
-              sb.append('n');
+              if (white) {
+                sb.append('n');
+              } else {
+                sb.append('N');
+              }
               break;
             case BISHOP:
-              sb.append('b');
+              if (white) {
+                sb.append('b');
+              } else {
+                sb.append('B');
+              }
               break;
             case QUEEN:
-              sb.append('q');
+              if (white) {
+                sb.append('q');
+              } else {
+                sb.append('Q');
+              }
               break;
             case KING:
-              sb.append('k');
+              if (white) {
+                sb.append('k');
+              } else {
+                sb.append('K');
+              }
               break;
             case ROOK:
-              sb.append('r');
+              if (white) {
+                sb.append('r');
+              } else {
+                sb.append('R');
+              }
               break;
             case PAWN:
-              sb.append('p');
+              if (white) {
+                sb.append('p');
+              } else {
+                sb.append('P');
+              }
               break;
           }
         }
@@ -205,7 +231,7 @@ public class MatchResultHandler {
     return result;
   }
 
-  //decisive: resignation
+  // decisive: resignation
   public static MatchResult gameOverResignation(String resigningColor) {
     MatchResult result;
     if (resigningColor.equals("white")) {
@@ -217,7 +243,7 @@ public class MatchResultHandler {
     return result;
   }
 
-  //draw agreement
+  // draw agreement
   public static MatchResult gameOverDrawAgreement() {
     MatchResult result = MatchResult.DRAW;
     result.setMessage("by agreement");

@@ -1,5 +1,7 @@
 package chess.sound;
 
+import chess.game.state.MatchConfiguration;
+import chess.game.state.MatchResult;
 import java.net.URISyntaxException;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;;
@@ -7,7 +9,7 @@ import javafx.scene.media.MediaPlayer;;
 public class SoundPlayer {
 
   private static SoundPlayer instance;
-
+  public static boolean playEnabled = true;
   private MediaPlayer clickPlayer, deniedPlayer, drawPlayer, movePlayer, winPlayer;
 
   private SoundPlayer() {
@@ -38,7 +40,20 @@ public class SoundPlayer {
     }
   }
 
+  public void playResultSound(MatchResult result) {
+    MatchConfiguration config = MatchConfiguration.getInstance();
+    if ((config.isPlayerWhiteAtStart() && result == MatchResult.WHITE_WINS)
+        || (!config.isPlayerWhiteAtStart() && result == MatchResult.BLACK_WINS)) {
+      playSound(Sound.WIN);
+    } else {
+      playSound(Sound.DRAW);
+    }
+  }
+
   public void playSound(Sound sound) {
+    if (!playEnabled) {
+      return;
+    }
     switch (sound) {
       case CLICK:
         clickPlayer.play();

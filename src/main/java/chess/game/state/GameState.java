@@ -4,6 +4,7 @@ import chess.game.engine.BoardGenerator;
 import chess.game.logic.Move;
 import chess.game.logic.Piece;
 import chess.game.logic.PieceType;
+import chess.game.logic.SpecialMoveType;
 
 public class GameState {
 
@@ -17,6 +18,8 @@ public class GameState {
   private Move lastWhiteMove, lastBlackMove, lastMove;
   private int[] whiteKingPos, blackKingPos;
   private boolean whiteKingInCheck, blackKingInCheck;
+
+  private boolean active;
 
   private int count50move;
 
@@ -39,6 +42,7 @@ public class GameState {
     whiteKingInCheck = false;
     blackKingInCheck = false;
     count50move = 0;
+    active = false;
     colorToTurn = "white";
     board = BoardGenerator.setUpBoard();
 
@@ -71,9 +75,13 @@ public class GameState {
   }
 
   public void handleMove(Move move) {
-    Piece moved = board[move.getTo()[0]][move.getTo()[1]];
-    moved.setFirstMove(false);
-    if (move.isCapturingMove() || moved.getType() == PieceType.PAWN) {
+    Piece piece = board[move.getTo()[0]][move.getTo()[1]];
+    piece.setFirstMove(false);
+    if (move.getMoveType() == SpecialMoveType.PROMOTION) {
+      piece.setType(move.getPromoteTo());
+    }
+
+    if (move.isCapturingMove() || piece.getType() == PieceType.PAWN) {
       count50move = 0;
     } else {
       count50move++;
@@ -158,5 +166,13 @@ public class GameState {
 
   public void setBlackKingInCheck(boolean blackKingInCheck) {
     this.blackKingInCheck = blackKingInCheck;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
   }
 }

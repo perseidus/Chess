@@ -1,17 +1,21 @@
 package chess.gui.model;
 
 import chess.game.engine.BoardGenerator;
-import chess.game.engine.MoveGenerator;
 import chess.game.engine.GameSession;
+import chess.game.engine.MoveGenerator;
 import chess.game.logic.Move;
 import chess.game.logic.Piece;
-import chess.game.state.MatchConfiguration;
-import chess.gui.view.BoardRenderer;
+import chess.game.logic.PieceType;
+import chess.game.logic.SpecialMoveType;
 import chess.game.state.GameState;
+import chess.gui.view.BoardRenderer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class BoardInteractionManager {
+
+  private static BoardInteractionManager instance;
 
   private BoardRenderer renderer;
   private GameState gameState;
@@ -24,7 +28,26 @@ public class BoardInteractionManager {
   private List<Move> selectedPieceMoves;
   boolean[][] possibleMoves;
 
-  public BoardInteractionManager(BoardRenderer renderer) {
+  private int currentI, currentJ;
+  private boolean[][] currentSquareEnemy;
+
+  public static BoardInteractionManager getInstance(BoardRenderer renderer) {
+    if (instance == null) {
+      instance = new BoardInteractionManager(renderer);
+      return instance;
+    }
+
+    if (!instance.gameState.isActive()) {
+      instance.gameSession = new GameSession(instance);
+      instance.gameSession.start();
+      renderer.removeButtonGraphics();
+    }
+    instance.renderer = renderer;
+    instance.rerender();
+    return instance;
+  }
+
+  private BoardInteractionManager(BoardRenderer renderer) {
     this.renderer = renderer;
     this.gameState = GameState.getInstance();
     this.pieces = gameState.getBoard();
@@ -33,6 +56,10 @@ public class BoardInteractionManager {
 
     this.gameSession = new GameSession(this);
     gameSession.start();
+    gameState.setActive(true);
+
+    currentI = -1;
+    currentJ = -1;
   }
 
   public void waitForMove() {
@@ -48,31 +75,38 @@ public class BoardInteractionManager {
     possibleMoves = null;
   }
 
-  public void handleButtonClick(int i, int j) {
+  public boolean handleButtonClick(int i, int j, PieceType type) {
     if (!gameSession.isPlayerTurn()) {
-      return;
+      return false;
     }
 
+    boolean promotion = false;
     if (pieces[i][j] != null && pieces[i][j].getColor().equals(gameState.getColorToTurn())) {
       friendlySquareClicked(i, j);
     } else {
-      emptyOrEnemySquareClicked(i, j);
+      promotion = emptyOrEnemySquareClicked(i, j, type);
     }
+
+    return promotion;
   }
 
   private void friendlySquareClicked(int i, int j) {
     selectedPiecePos = new int[]{i, j};
     selectedPieceMoves = moves.get("" + i + j);
     pieceSelected = true;
-    possibleMoves = BoardGenerator.movesToBitboard(selectedPieceMoves);
+    possibleMoves = BoardGenerator.movesToBitboardBoolean(selectedPieceMoves);
     boolean[][] enemySquare = BoardGenerator.getEnemyPosBitboard(pieces, pieces[i][j].getColor());
     renderer.removeButtonGraphics();
-    renderer.drawPossibleMoves(possibleMoves, enemySquare, i, j);
+    renderer.drawPossibleMoves(selectedPieceMoves, enemySquare, i, j);
+    currentI = i;
+    currentJ = j;
+    currentSquareEnemy = enemySquare;
   }
 
-  private void emptyOrEnemySquareClicked(int i, int j) {
+  //  returns true if promotion
+  private boolean emptyOrEnemySquareClicked(int i, int j, PieceType type) {
     if (!pieceSelected) {
-      return;
+      return false;
     }
 
     if (possibleMoves[i][j]) {
@@ -83,8 +117,18 @@ public class BoardInteractionManager {
           move = m;
         }
       }
+
+      if ((move.getMoveType() == SpecialMoveType.PROMOTION) && (type == PieceType.NONE)) {
+        return true;
+      }
+
+      if (type != PieceType.NONE) {
+        move = new Move(move.getFrom(), move.getTo(), move.getMoveType(), type);
+      }
+
       gameSession.sendMove(move);
     }
+    return false;
   }
 
   public void updateClocks(int whiteTime, int blackTime) {
@@ -119,13 +163,21 @@ public class BoardInteractionManager {
     return String.format(format, firstPart, secondPart);
   }
 
-  public void giveUp() {
-    gameSession.giveUp();
-  }
-
   public void refresh() {
     resetInputs();
     updateClocks(gameSession.getWhiteTime(), gameSession.getBlackTime());
     renderer.refresh();
+  }
+
+  public void rerender() {
+    renderer.refresh();
+    if (selectedPieceMoves == null) {
+      selectedPieceMoves = new ArrayList<>();
+    }
+    renderer.drawPossibleMoves(selectedPieceMoves, currentSquareEnemy, currentI, currentJ);
+  }
+
+  public GameSession getGameSession() {
+    return gameSession;
   }
 }

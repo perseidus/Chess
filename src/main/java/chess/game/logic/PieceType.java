@@ -6,7 +6,8 @@ public enum PieceType {
   BISHOP("/pieces/bishop_"),
   ROOK("/pieces/rook_"),
   QUEEN("/pieces/queen_"),
-  KING("/pieces/king_");
+  KING("/pieces/king_"),
+  NONE("");
 
   private String path;
 

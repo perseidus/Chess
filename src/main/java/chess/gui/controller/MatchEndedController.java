@@ -20,6 +20,7 @@ public class MatchEndedController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+    GameState.getInstance().setActive(false);
     topText.setText(GameSession.primaryMessage);
     bottomText.setText(GameSession.secondaryMessage);
   }

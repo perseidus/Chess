@@ -18,8 +18,10 @@ public class MoveGenerator {
   private static String colorToTurn;
   private static Move lastEnemyMove;
 
+  private static GameState gameState;
+
   public static HashMap<String, List<Move>> getPossibleMoves(Piece[][] pieces) {
-    GameState gameState = GameState.getInstance();
+    gameState = GameState.getInstance();
     colorToTurn = gameState.getColorToTurn();
     lastEnemyMove = gameState.getLastEnemyMove();
     HashMap<String, List<Move>> allMoves = new HashMap<>();
@@ -121,21 +123,18 @@ public class MoveGenerator {
     //double move, en passant (not for enemy pieces), normal move (+ promotion), capturing move (+ promotion)
     if (pieces[i][j].isFirstMove()
         && pieces[i - moveDir][j] == null && pieces[i - 2 * moveDir][j] == null) {
-      moves.add(new Move(from, new int[]{i - 2 * moveDir, j}, SpecialMoveType.DOUBLE_PAWN));
+      moves.add(new Move(from, new int[]{i - 2 * moveDir, j}, SpecialMoveType.DOUBLE_PAWN, null));
     }
     if (lastEnemyMove != null && lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN
         && pieces[i][j].getColor().equals(colorToTurn)
-        && 7 - lastEnemyMove.getTo()[0] == i && 7 - lastEnemyMove.getTo()[1] == j - 1) {
-      moves.add(new Move(from, new int[]{i - moveDir, j - 1}, SpecialMoveType.EN_PASSANT));
-    }
-    if (lastEnemyMove != null && lastEnemyMove.getMoveType() == SpecialMoveType.DOUBLE_PAWN
-        && pieces[i][j].getColor().equals(colorToTurn)
-        && 7 - lastEnemyMove.getTo()[0] == i && 7 - lastEnemyMove.getTo()[1] == j + 1) {
-      moves.add(new Move(from, new int[]{i - moveDir, j + 1}, SpecialMoveType.EN_PASSANT));
+        && lastEnemyMove.getTo()[0] == i && (lastEnemyMove.getTo()[1] == j - 1 || lastEnemyMove.getTo()[1] == j + 1)) {
+      int toJ = lastEnemyMove.getTo()[1];
+      moves.add(new Move(from, new int[]{i - moveDir, toJ}, SpecialMoveType.EN_PASSANT, null));
     }
     if (pieces[i - moveDir][j] == null) {
       if (i - moveDir == 7 || i - moveDir == 0) {
-        moves.add(new Move(from, new int[]{i - moveDir, j}, SpecialMoveType.PROMOTION));
+        PieceType promoteTo = PieceType.QUEEN;  // dummy
+        moves.add(new Move(from, new int[]{i - moveDir, j}, SpecialMoveType.PROMOTION, promoteTo));
       } else {
         moves.add(new Move(from, new int[]{i - moveDir, j}));
       }
@@ -143,7 +142,8 @@ public class MoveGenerator {
     if (j - 1 >= 0 && pieces[i - moveDir][j - 1] != null
         && !pieces[i - moveDir][j - 1].getColor().equals(pieces[i][j].getColor())) {
       if (i - moveDir == 7 || i - moveDir == 0) {
-        moves.add(new Move(from, new int[]{i - moveDir, j - 1}, SpecialMoveType.PROMOTION));
+        PieceType promoteTo = PieceType.QUEEN;  // dummy
+        moves.add(new Move(from, new int[]{i - moveDir, j - 1}, SpecialMoveType.PROMOTION, promoteTo));
       } else {
         moves.add(new Move(from, new int[]{i - moveDir, j - 1}));
       }
@@ -151,7 +151,8 @@ public class MoveGenerator {
     if (j + 1 <= 7 && pieces[i - moveDir][j + 1] != null
         && !pieces[i - moveDir][j + 1].getColor().equals(pieces[i][j].getColor())) {
       if (i - moveDir == 7 || i - moveDir == 0) {
-        moves.add(new Move(from, new int[]{i - moveDir, j + 1}, SpecialMoveType.PROMOTION));
+        PieceType promoteTo = PieceType.QUEEN;  // dummy
+        moves.add(new Move(from, new int[]{i - moveDir, j + 1}, SpecialMoveType.PROMOTION, promoteTo));
       } else {
         moves.add(new Move(from, new int[]{i - moveDir, j + 1}));
       }
@@ -333,7 +334,7 @@ public class MoveGenerator {
         !pieces[i - 1][j - 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i - 1, j - 1}));
     }
-    if (((j - 1) <= 7) && ((pieces[i][j - 1] == null) ||
+    if (((j - 1) >= 0) && ((pieces[i][j - 1] == null) ||
         !pieces[i][j - 1].getColor().equals(pieces[i][j].getColor()))) {
       moves.add(new Move(from, new int[]{i, j - 1}));
     }
@@ -366,12 +367,12 @@ public class MoveGenerator {
       if (pieces[7][7] != null && pieces[7][7].isFirstMove()
           && pieces[i][j + 1] == null && pieces[i][j + 2] == null && pieces[7][6] == null
           && !enemyAttackedSquares[i][j + 1] && !enemyAttackedSquares[i][j + 2]) {
-        moves.add(new Move(from, new int[]{i, j + 2}, SpecialMoveType.CASTLE));
+        moves.add(new Move(from, new int[]{i, j + 2}, SpecialMoveType.CASTLE, null));
       }
       if (pieces[7][0] != null && pieces[7][0].isFirstMove()
           && pieces[i][j - 1] == null && pieces[i][j - 2] == null && pieces[7][1] == null
           && !enemyAttackedSquares[i][j - 1] && !enemyAttackedSquares[i][j - 2]) {
-        moves.add(new Move(from, new int[]{i, j - 2}, SpecialMoveType.CASTLE));
+        moves.add(new Move(from, new int[]{i, j - 2}, SpecialMoveType.CASTLE, null));
       }
     }
 

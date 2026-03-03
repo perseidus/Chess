@@ -15,6 +15,8 @@ public class ScreenManager extends Application {
 
   private static Stage stage;
   private static Stage popUpStage;
+  private static Screen currentScreen;
+  private static boolean lightMode = true;
 
   @Override
   public void start(Stage stage) throws Exception {
@@ -27,10 +29,18 @@ public class ScreenManager extends Application {
   }
 
   public static void switchScene(Screen screen) {
+    currentScreen = screen;
     try {
+      String style = lightMode ? "/styles/light.css" : "/styles/dark.css";
       Parent root = FXMLLoader.load(ScreenManager.class.getResource(screen.getPath()));
       Scene scene = new Scene(root);
+      scene.getStylesheets().add(ScreenManager.class.getResource(style).toExternalForm());
       stage.setScene(scene);
+      stage.setResizable(false);
+
+      if (screen == Screen.CHESSBOARD) {
+
+      }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -40,6 +50,11 @@ public class ScreenManager extends Application {
     Platform.runLater(new Runnable() {
       @Override
       public void run() {
+        try {
+          Thread.sleep(500);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
         popUpStage = new Stage();
         Parent root = null;
         try {
@@ -65,5 +80,14 @@ public class ScreenManager extends Application {
 
   public static void closeMatchEndingPopUp() {
     popUpStage.close();
+  }
+
+  public static boolean isLightMode() {
+    return lightMode;
+  }
+
+  public static void switchTheme() {
+    lightMode = !lightMode;
+    switchScene(currentScreen);
   }
 }

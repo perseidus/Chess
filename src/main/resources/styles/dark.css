@@ -1,0 +1,190 @@
+/* ====== COLORS ====== https://coolors.co/palettes/popular/11001c */
+.root {
+  -fx-font-family: "Consolas";
+  -dpurple: #11001c;
+  -dpurple-light: #11001c90;
+  -dpurple-lighter: #11001c60;
+  -dpurple-even-lighter: #11001c40;
+
+  -anti-neutral: #f0d6ff;
+  -almost-neutral: #090010;
+
+  -combo-gradient-from: #3a015c;
+  -combo-gradient-to: #4f0147;
+
+  -purple-type: #150b21;
+  -purple-type-alpha: #150b21F8;
+}
+
+/* ====== BACKGROUND GRADIENT ====== */
+.root {
+  -fx-background-color: linear-gradient(to bottom right, -purple-type-alpha, -dpurple);
+}
+
+/* ====== TEXT ====== */
+.button, .label {
+  -fx-text-fill: #f0d6ff;
+}
+
+/* ====== BUTTONS ====== */
+.button {
+  -fx-font-family: "Consolas";
+  -fx-background-color: linear-gradient(to bottom right, -combo-gradient-from, -purple-type);
+  -fx-background-radius: 6; /* rounded corners */
+  -fx-border-width: 0;
+  -fx-focus-color: transparent; /* remove blue focus ring */
+  -fx-faint-focus-color: transparent;
+  -fx-cursor: hand;
+}
+
+.buttonsClass {
+  -fx-font-size: 150%;
+  -fx-background-color: linear-gradient(to bottom right, -almost-neutral, -purple-type);
+  -fx-border-color: #f0d6ff;
+  -fx-border-width: 1;
+  -fx-border-radius: 10;
+  -fx-background-radius: 10;
+}
+
+.buttonsClass:hover {
+  -fx-font-size: 170%;
+}
+
+.button:pressed {
+  -fx-background-color: linear-gradient(to right, -dpurple-light, -dpurple-lighter);
+  -fx-font-weight: bold;
+}
+
+.buttonsClass:pressed {
+  -fx-background-color: linear-gradient(to right, -purple-type, -dpurple-lighter);
+}
+
+.popOnButtonsClass {
+  -fx-font-size: 120%;
+  -fx-background-color: linear-gradient(to bottom right, #4f0147, #d30b4d);
+}
+
+.popOnButtonsClass:hover {
+  -fx-font-size: 130%;
+}
+
+.popOnButtonsClass:pressed {
+  -fx-background-color: linear-gradient(to bottom right, #d30b4d, #4f0147);
+}
+
+/* ====== RADIO BUTTONS ====== */
+
+.radio-button {
+  -fx-background-color: transparent;
+  -fx-background-image: url("../pieces/bishop_black.png"); /* <-- your image */
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+.radio-button .radio {
+  -fx-opacity: 0;
+}
+
+/* When selected */
+.radio-button:selected {
+  -fx-border-color: #f0d6ff;
+  -fx-background-size: 80 80;
+  -fx-border-width: 2;
+  -fx-background-radius: 15;
+}
+
+/* ====== COMBOBOX (Drop-down) ====== */
+.combo-box {
+  -fx-background-color: linear-gradient(to bottom, -combo-gradient-from, -combo-gradient-to);
+  -fx-border-color: -dpurple-lighter;
+  -fx-border-radius: 4;
+  -fx-background-radius: 4;
+  -fx-padding: 2;
+}
+
+.combo-box .list-cell {
+  -fx-text-fill: #f0d6ff;
+}
+
+.combo-box:hover {
+  -fx-background-color: linear-gradient(to top, -combo-gradient-from, -combo-gradient-to);
+  -fx-border-color: -dpurple-even-lighter;
+}
+
+/* The arrow button */
+.combo-box .arrow-button {
+  -fx-background-color: transparent;
+}
+
+.combo-box .arrow {
+  -fx-background-color: -dpurple;
+}
+
+/* The drop-down list */
+.combo-box-popup .list-view {
+  -fx-background-color: #3a015c;
+  -fx-control-inner-background: #3a015c;
+  -fx-border-color: #11001c;
+}
+
+.combo-box-popup .list-cell {
+  -fx-background-color: #090010;
+  -fx-text-fill: #f0d6ff;
+}
+
+.combo-box-popup .list-cell:hover {
+  -fx-background-color: -dpurple-light;
+}
+
+/* ====== POP ON ====== */
+.popOn {
+  -fx-background-color: linear-gradient(to bottom right, #090010, #3a015c);
+}
+
+/* ====== TOGGLE SWITCH ====== */
+.toggle-switch {
+  -fx-font-size: 140%;
+}
+
+.toggle-switch .thumb-area {
+  -fx-background-color: #150b21;
+}
+
+/* When the switch is selected (ON) */
+.toggle-switch:selected .thumb-area {
+  -fx-background-color: linear-gradient(to bottom, #e30b5d, #4f0147);
+}
+
+.toggle-switch .thumb {
+  -fx-background-color: linear-gradient(to bottom, #f0d6ff, #9a879d);
+}
+
+/* ====== SCROLL BAR ====== */
+.scroll-bar .track, .scroll-bar{
+  -fx-background-color: #11001c;     /* track colour */
+  -fx-background-radius: 5;
+  -fx-border-color: transparent;
+}
+
+/* The draggable thumb (the "scroll wheel") */
+.scroll-bar .thumb {
+  -fx-background-color: #3a015c;
+  -fx-background-radius: 5;
+  -fx-border-radius: 5;
+}
+
+/* The increment and decrement buttons (small arrows) */
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button,
+.corner {
+  -fx-background-color: #4f0147;
+  -fx-background-radius: 0;
+}
+
+/* The arrows inside the buttons */
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+  -fx-background-color: #f0d6ff;
+}

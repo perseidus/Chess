@@ -40,7 +40,7 @@ public class BoardGenerator {
 
   public static Piece[][] getBoardAfterMove(Piece[][] pieces, Move move, boolean setCapture) {
 
-    if (setCapture && pieces[move.getTo()[0]][move.getTo()[1]] != null){
+    if (setCapture && pieces[move.getTo()[0]][move.getTo()[1]] != null) {
       move.setCapturingMove(true);
     }
 
@@ -73,8 +73,22 @@ public class BoardGenerator {
     return pieceAttacksSquare;
   }
 
-  public static boolean[][] movesToBitboard(List<Move> moves) {
+  public static int[][] movesToBitboard(List<Move> moves) {
+    int[][] pieceAttacksSquare = new int[8][8];
+
+    for (Move move : moves) {
+      if (move.getMoveType() == SpecialMoveType.EN_PASSANT) {
+        pieceAttacksSquare[move.getTo()[0]][move.getTo()[1]] = 2;
+      } else {
+        pieceAttacksSquare[move.getTo()[0]][move.getTo()[1]] = 1;
+      }
+    }
+    return pieceAttacksSquare;
+  }
+
+  public static boolean[][] movesToBitboardBoolean(List<Move> moves) {
     boolean[][] pieceAttacksSquare = new boolean[8][8];
+
     for (Move move : moves) {
       pieceAttacksSquare[move.getTo()[0]][move.getTo()[1]] = true;
     }

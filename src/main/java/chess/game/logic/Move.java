@@ -6,17 +6,24 @@ public class Move {
   private int[] to;
   private boolean capturingMove;
   private SpecialMoveType moveType;
+  private PieceType promoteTo;
 
   public Move(int[] from, int[] to) {
     this.from = from;
     this.to = to;
     this.moveType = SpecialMoveType.NONE;
+    this.promoteTo = null;
   }
 
-  public Move(int[] from, int[] to, SpecialMoveType moveType) {
+  public Move(int[] from, int[] to, SpecialMoveType moveType, PieceType promoteTo) {
     this.from = from;
     this.to = to;
     this.moveType = moveType;
+    if (moveType == SpecialMoveType.PROMOTION) {
+      this.promoteTo = promoteTo;
+    } else {
+      this.promoteTo = null;
+    }
   }
 
   public int[] getFrom() {
@@ -44,5 +51,9 @@ public class Move {
 
   public SpecialMoveType getMoveType() {
     return moveType;
+  }
+
+  public PieceType getPromoteTo() {
+    return promoteTo;
   }
 }

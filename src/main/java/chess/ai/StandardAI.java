@@ -23,11 +23,11 @@ public class StandardAI extends AI {
     List<Move> possibleMoves = new ArrayList<>();
     List<List<Move>> listOfLists = new ArrayList<>(moves.values());
     for (List<Move> listOfMoves : listOfLists) {
-      for (Move move : listOfMoves) {
-        possibleMoves.add(move);            //add all moves to one list
-      }
+      possibleMoves.addAll(listOfMoves);
     }
-    SendAIMoveThread t = new SendAIMoveThread(session, possibleMoves.get(0));
+
+    int index = (int) (Math.random() * possibleMoves.size());
+    SendAIMoveThread t = new SendAIMoveThread(session, possibleMoves.get(index));
     t.start();
   }
 }

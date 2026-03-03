@@ -1,11 +1,16 @@
 package chess.gui.view;
 
+import chess.game.engine.BoardGenerator;
+import chess.game.engine.GameSession;
 import chess.game.logic.Move;
 import chess.game.logic.Piece;
 import chess.game.state.GameState;
+import chess.game.state.MatchConfiguration;
 import chess.game.state.Parameters;
 import java.util.HashMap;
+import java.util.List;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,18 +21,26 @@ import javafx.scene.layout.StackPane;
 
 public class BoardRenderer {
 
+  public static boolean showMoves = true;
+
   private GameState gameState;
+  private MatchConfiguration configs;
+  private GameSession gameSession;
 
   private GridPane gridPane;
+  private Button drawButton;
   private HashMap<String, Button> buttons;
   private HashMap<String, ImageView> images;
   private Piece[][] pieces;
 
   private Label upperTimeLabel, lowerTimeLabel;
 
-  public BoardRenderer(GridPane gridPane, Label upperTimeLabel, Label lowerTimeLabel) {
+  public BoardRenderer(GridPane gridPane, Button drawButton, Label upperTimeLabel,
+      Label lowerTimeLabel) {
     this.gridPane = gridPane;
+    this.drawButton = drawButton;
     this.gameState = GameState.getInstance();
+    this.configs = MatchConfiguration.getInstance();
     this.pieces = gameState.getBoard();
     this.buttons = new HashMap<>();
     this.images = new HashMap<>();
@@ -40,9 +53,15 @@ public class BoardRenderer {
       ImageView image = (ImageView) ((StackPane) node).getChildren().get(0);
       images.put(button.getId(), image);
     }
+
+    if (gameState.getLastMove() == null) {
+      drawButton.setDisable(true);
+    }
   }
 
   public void drawPieces() {
+    drawTiles();
+
     Piece piece;
     ImageView image;
     for (int i = 0; i < 8; i++) {
@@ -56,6 +75,35 @@ public class BoardRenderer {
         } else {
           images.get("a" + j + i).setImage(null);
         }
+      }
+    }
+  }
+
+  private void drawTiles() {
+    gridPane.setStyle("-fx-background-color: " + Parameters.darkTile() + ";");
+    String lightClass;
+
+    // get direction of board (to color tiles correctly)
+    MatchConfiguration config = MatchConfiguration.getInstance();
+    if (config.isPvpMode()) {
+      if (gameState.getColorToTurn().equals("white")) {
+        lightClass = "a";
+      } else {
+        lightClass = "b";
+      }
+    } else if (config.isPlayerWhiteAtStart()) {
+      lightClass = "a";
+    } else {
+      lightClass = "b";
+    }
+
+    ObservableList<Node> panes = gridPane.getChildren();
+    for (Node pane : panes) {
+      StackPane tile = (StackPane) pane;
+      if (tile.getStyleClass().contains(lightClass)) {
+        tile.setStyle("-fx-background-color: " + Parameters.lightTile() + ";");
+      } else {
+        tile.setStyle("-fx-background-color: " + Parameters.darkTile() + ";");
       }
     }
   }
@@ -79,25 +127,38 @@ public class BoardRenderer {
     });
   }
 
-  public void drawPossibleMoves(boolean[][] possibleMove, boolean[][] enemySquare, int x, int y) {
+  public void drawPossibleMoves(List<Move> possibleMoves, boolean[][] enemySquare, int x, int y) {
+    if (!showMoves) {
+      return;
+    }
+
+    int[][] moveOnBoard = BoardGenerator.movesToBitboard(possibleMoves);
+
     Platform.runLater(new Runnable() {
       @Override
       public void run() {
         String id;
         for (int i = 0; i < 8; i++) {
           for (int j = 0; j < 8; j++) {
-            if (possibleMove[i][j] && enemySquare[i][j]) {
+            int move = moveOnBoard[i][j]; // 0 -> no move, 1 -> regular move, 2 -> en passant
+            if (move == 1 && enemySquare[i][j]) {
               id = "a" + j + i;
               buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
-            } else if (possibleMove[i][j]) {
+            } else if (move == 2) { // en passant: highlight square behind
+              id = "a" + j + i;
+              buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
+            } else if (move == 1) {
               id = "a" + j + i;
               buttons.get(id).setGraphic(NodeFactory.getSmallCircle(images.get(id)));
             }
           }
         }
         id = "a" + y + x;
-        drawLastMove(true, id);
-        buttons.get(id).setStyle("-fx-background-color: " + Parameters.moveToColor + ";");
+        if (!id.equals("a-1-1")) {
+          drawLastMove(true, id);
+          buttons.get(id).setStyle("-fx-background-color: " + Parameters.moveToColor() + ";");
+          drawChecks();
+        }
       }
     });
   }
@@ -115,12 +176,15 @@ public class BoardRenderer {
         }
 
         buttons.get("a" + lastMove.getFrom()[1] + lastMove.getFrom()[0])
-            .setStyle("-fx-background-color: " + Parameters.moveFromColor + ";");
+            .setStyle("-fx-background-color: " + Parameters.moveFromColor() + "; "
+                + "-fx-border-radius: 0;");
         buttons.get("a" + lastMove.getTo()[1] + lastMove.getTo()[0])
-            .setStyle("-fx-background-color: " + Parameters.moveToColor + ";");
+            .setStyle("-fx-background-color: " + Parameters.moveToColor() + "; "
+                + "-fx-border-radius: 0;");
 
         if (pieceSelected) {
-          buttons.get(id).setStyle("-fx-background-color: " + Parameters.moveToColor + ";");
+          buttons.get(id).setStyle("-fx-background-color: " + Parameters.moveToColor() + "; "
+              + "-fx-border-radius: 0;");
         }
       }
     });
@@ -148,11 +212,28 @@ public class BoardRenderer {
     });
   }
 
+  private void enableDrawButton() {
+    if (!configs.isPvpMode() || gameState.getLastMove() == null) {
+      drawButton.setDisable(true);
+      return;
+    }
+
+    if (gameSession.currentPlayerOfferedDraw()) {
+      drawButton.setDisable(true);
+    } else {
+      drawButton.setDisable(false);
+    }
+  }
+
   public void refresh() {
     removeButtonGraphics();
     drawPieces();
     drawLastMove(false, "");
     drawChecks();
+    enableDrawButton();
   }
 
+  public void setGameSession(GameSession gameSession) {
+    this.gameSession = gameSession;
+  }
 }
