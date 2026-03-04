@@ -128,28 +128,27 @@ public class BoardRenderer {
   }
 
   public void drawPossibleMoves(List<Move> possibleMoves, boolean[][] enemySquare, int x, int y) {
-    if (!showMoves) {
-      return;
-    }
-
     int[][] moveOnBoard = BoardGenerator.movesToBitboard(possibleMoves);
 
     Platform.runLater(new Runnable() {
       @Override
       public void run() {
         String id;
-        for (int i = 0; i < 8; i++) {
-          for (int j = 0; j < 8; j++) {
-            int move = moveOnBoard[i][j]; // 0 -> no move, 1 -> regular move, 2 -> en passant
-            if (move == 1 && enemySquare[i][j]) {
-              id = "a" + j + i;
-              buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
-            } else if (move == 2) { // en passant: highlight square behind
-              id = "a" + j + i;
-              buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
-            } else if (move == 1) {
-              id = "a" + j + i;
-              buttons.get(id).setGraphic(NodeFactory.getSmallCircle(images.get(id)));
+
+        if (showMoves) {
+          for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+              int move = moveOnBoard[i][j]; // 0 -> no move, 1 -> regular move, 2 -> en passant
+              if (move == 1 && enemySquare[i][j]) {
+                id = "a" + j + i;
+                buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
+              } else if (move == 2) { // en passant: highlight square behind
+                id = "a" + j + i;
+                buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
+              } else if (move == 1) {
+                id = "a" + j + i;
+                buttons.get(id).setGraphic(NodeFactory.getSmallCircle(images.get(id)));
+              }
             }
           }
         }
