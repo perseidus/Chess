@@ -66,9 +66,20 @@
 
 /* ====== RADIO BUTTONS ====== */
 
+#whiteButton {
+  -fx-background-image: url("../pieces/rook_white.png");
+}
+
+#blackButton {
+  -fx-background-image: url("../pieces/rook_black.png");
+}
+
+#randomButton {
+  -fx-background-image: url("../pieces/rook_random.png");
+}
+
 .radio-button {
   -fx-background-color: transparent;
-  -fx-background-image: url("../pieces/bishop_black.png"); /* <-- your image */
   -fx-background-size: 70 70;
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
