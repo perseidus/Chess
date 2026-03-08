@@ -57,6 +57,34 @@ public class BoardRenderer {
     if (gameState.getLastMove() == null) {
       drawButton.setDisable(true);
     }
+
+    initBindings();
+  }
+
+  private void initBindings() {
+
+    ObservableList<Node> panes = gridPane.getChildren();
+    for (Node pane : panes) {
+      StackPane tile = (StackPane) pane;
+      tile.prefWidthProperty().bind(gridPane.widthProperty().divide(8.0));
+      tile.prefHeightProperty().bind(gridPane.heightProperty().divide(8.0));
+      tile.minWidthProperty().bind(gridPane.widthProperty().divide(8.0));
+      tile.minHeightProperty().bind(gridPane.heightProperty().divide(8.0));
+      tile.maxWidthProperty().bind(gridPane.widthProperty().divide(8.0));
+      tile.maxHeightProperty().bind(gridPane.heightProperty().divide(8.0));
+
+      ImageView image = (ImageView) tile.getChildren().get(0);
+      image.fitWidthProperty().bind(tile.widthProperty());
+      image.fitHeightProperty().bind(tile.heightProperty());
+
+      Button button = (Button) tile.getChildren().get(1);
+      button.prefWidthProperty().bind(tile.widthProperty());
+      button.prefHeightProperty().bind(tile.heightProperty());
+      button.minWidthProperty().bind(tile.widthProperty());
+      button.minHeightProperty().bind(tile.heightProperty());
+      button.maxWidthProperty().bind(tile.widthProperty());
+      button.maxHeightProperty().bind(tile.heightProperty());
+    }
   }
 
   public void drawPieces() {
@@ -70,8 +98,6 @@ public class BoardRenderer {
         if (piece != null) {
           image = images.get("a" + j + i);
           image.setImage(new Image(piece.getType().getPath() + piece.getColor() + ".png"));
-          image.fitWidthProperty().bind(buttons.get("a" + j + i).widthProperty());
-          image.fitHeightProperty().bind(buttons.get("a" + j + i).heightProperty());
         } else {
           images.get("a" + j + i).setImage(null);
         }

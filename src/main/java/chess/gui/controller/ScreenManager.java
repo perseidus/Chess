@@ -19,6 +19,8 @@ public class ScreenManager extends Application {
   private static Screen currentScreen;
   private static boolean lightMode = true;
 
+  private static Scene lastScene;
+
   @Override
   public void start(Stage stage) throws Exception {
     ScreenManager.stage = stage;
@@ -34,10 +36,17 @@ public class ScreenManager extends Application {
     currentScreen = screen;
     try {
       Parent root = FXMLLoader.load(ScreenManager.class.getResource(screen.getPath()));
-      Scene scene = new Scene(root);
+
+      Scene scene;
+      if (lastScene != null) {
+        scene = new Scene(root, lastScene.getWidth(), lastScene.getHeight());
+      } else {
+        scene = new Scene(root);
+      }
+      lastScene = scene;
+
       setStylesheets(scene);
       stage.setScene(scene);
-      stage.setResizable(false);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
