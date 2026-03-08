@@ -28,31 +28,16 @@
 
 /* ====== BUTTONS ====== */
 .button {
-  -fx-font-family: "Consolas";
   -fx-background-color: linear-gradient(to bottom right, -combo-gradient-from, -purple-type);
-  -fx-background-radius: 6; /* rounded corners */
-  -fx-border-width: 0;
-  -fx-focus-color: transparent; /* remove blue focus ring */
-  -fx-faint-focus-color: transparent;
-  -fx-cursor: hand;
 }
 
 .buttonsClass {
-  -fx-font-size: 150%;
   -fx-background-color: linear-gradient(to bottom right, -almost-neutral, -purple-type);
   -fx-border-color: #f0d6ff;
-  -fx-border-width: 1;
-  -fx-border-radius: 10;
-  -fx-background-radius: 10;
-}
-
-.buttonsClass:hover {
-  -fx-font-size: 170%;
 }
 
 .button:pressed {
   -fx-background-color: linear-gradient(to right, -dpurple-light, -dpurple-lighter);
-  -fx-font-weight: bold;
 }
 
 .buttonsClass:pressed {
@@ -60,12 +45,7 @@
 }
 
 .popOnButtonsClass {
-  -fx-font-size: 120%;
   -fx-background-color: linear-gradient(to bottom right, #4f0147, #d30b4d);
-}
-
-.popOnButtonsClass:hover {
-  -fx-font-size: 130%;
 }
 
 .popOnButtonsClass:pressed {
@@ -74,11 +54,6 @@
 
 #backButton {
   -fx-background-image: url("../misc/back_dark.png");
-  -fx-background-color: transparent;
-  -fx-background-size: 70 70;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: center;
-  -fx-alignment: center;
 }
 
 #backButton:pressed {
@@ -87,11 +62,6 @@
 
 #nextButton {
   -fx-background-image: url("../misc/next_dark.png");
-  -fx-background-color: transparent;
-  -fx-background-size: 70 70;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: center;
-  -fx-alignment: center;
 }
 
 #nextButton:pressed {
@@ -100,11 +70,6 @@
 
 #settingsButton {
   -fx-background-image: url("../misc/settings_dark.png");
-  -fx-background-color: transparent;
-  -fx-background-size: 50 50;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: center;
-  -fx-alignment: center;
 }
 
 #settingsButton:pressed {
@@ -113,11 +78,6 @@
 
 #themeButton {
   -fx-background-image: url("../misc/moon_dark.png");
-  -fx-background-color: transparent;
-  -fx-background-size: 50 50;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: center;
-  -fx-alignment: center;
 }
 
 #themeButton:hover {
@@ -130,18 +90,10 @@
 
 #giveUpButton {
   -fx-background-image: url("../misc/flag_dark.png");
-  -fx-background-size: 70 70;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: center;
-  -fx-alignment: center;
 }
 
 #drawButton {
   -fx-background-image: url("../misc/hands_dark.png");
-  -fx-background-size: 70 70;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: center;
-  -fx-alignment: center;
 }
 
 /* ====== RADIO BUTTONS ====== */
@@ -158,33 +110,14 @@
   -fx-background-image: url("../pieces/rook_random.png");
 }
 
-.radio-button {
-  -fx-background-color: transparent;
-  -fx-background-size: 70 70;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: center;
-  -fx-alignment: center;
-}
-
-.radio-button .radio {
-  -fx-opacity: 0;
-}
-
-/* When selected */
 .radio-button:selected {
   -fx-border-color: #f0d6ff;
-  -fx-background-size: 80 80;
-  -fx-border-width: 2;
-  -fx-background-radius: 15;
 }
 
 /* ====== COMBOBOX (Drop-down) ====== */
 .combo-box {
   -fx-background-color: linear-gradient(to bottom, -combo-gradient-from, -combo-gradient-to);
   -fx-border-color: -dpurple-lighter;
-  -fx-border-radius: 4;
-  -fx-background-radius: 4;
-  -fx-padding: 2;
 }
 
 .combo-box .list-cell {
@@ -194,11 +127,6 @@
 .combo-box:hover {
   -fx-background-color: linear-gradient(to top, -combo-gradient-from, -combo-gradient-to);
   -fx-border-color: -dpurple-even-lighter;
-}
-
-/* The arrow button */
-.combo-box .arrow-button {
-  -fx-background-color: transparent;
 }
 
 .combo-box .arrow {
@@ -247,15 +175,11 @@
 /* ====== SCROLL BAR ====== */
 .scroll-bar .track, .scroll-bar{
   -fx-background-color: #11001c;     /* track colour */
-  -fx-background-radius: 5;
-  -fx-border-color: transparent;
 }
 
 /* The draggable thumb (the "scroll wheel") */
 .scroll-bar .thumb {
   -fx-background-color: #3a015c;
-  -fx-background-radius: 5;
-  -fx-border-radius: 5;
 }
 
 /* The increment and decrement buttons (small arrows) */
@@ -263,7 +187,6 @@
 .scroll-bar .decrement-button,
 .corner {
   -fx-background-color: #4f0147;
-  -fx-background-radius: 0;
 }
 
 /* The arrows inside the buttons */

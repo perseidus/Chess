@@ -1,0 +1,129 @@
+/* ====== BUTTONS ====== */
+.button {
+  -fx-font-family: "Consolas";
+  -fx-background-color: linear-gradient(to bottom right, -lgreen-lighter, -lgreen);
+  -fx-background-radius: 6; /* rounded corners */
+  -fx-border-color: transparent; /* remove border */
+  -fx-border-width: 0;
+  -fx-focus-color: transparent; /* remove blue focus ring */
+  -fx-faint-focus-color: transparent;
+  -fx-cursor: hand;
+}
+
+.buttonsClass {
+  -fx-font-size: 150%;
+  -fx-border-width: 1;
+  -fx-border-radius: 10;
+  -fx-background-radius: 10;
+}
+
+.buttonsClass:hover {
+  -fx-font-size: 170%;
+}
+
+.button:pressed {
+  -fx-font-weight: bold;
+}
+
+.popOnButtonsClass {
+  -fx-font-size: 120%;
+}
+
+.popOnButtonsClass:hover {
+  -fx-font-size: 130%;
+}
+
+#backButton {
+  -fx-background-color: transparent;
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#nextButton {
+  -fx-background-color: transparent;
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#settingsButton {
+  -fx-background-color: transparent;
+  -fx-background-size: 50 50;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#themeButton {
+  -fx-background-color: transparent;
+  -fx-background-size: 50 50;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#giveUpButton {
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#drawButton {
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+/* ====== RADIO BUTTONS ====== */
+
+.radio-button {
+  -fx-background-color: transparent;
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+.radio-button .radio {
+  -fx-opacity: 0;
+}
+
+.radio-button:selected {
+  -fx-background-size: 80 80;
+  -fx-border-width: 2;
+  -fx-background-radius: 15;
+}
+
+/* ====== COMBOBOX (Drop-down) ====== */
+.combo-box {
+  -fx-border-radius: 4;
+  -fx-background-radius: 4;
+  -fx-padding: 2;
+}
+
+.combo-box .arrow-button {
+  -fx-background-color: transparent;
+}
+
+/* ====== SCROLL BAR ====== */
+.scroll-bar .track, .scroll-bar{
+  -fx-background-radius: 5;
+  -fx-border-color: transparent;
+}
+
+/* The draggable thumb (the "scroll wheel") */
+.scroll-bar .thumb {
+  -fx-background-radius: 5;
+  -fx-border-radius: 5;
+}
+
+/* The increment and decrement buttons (small arrows) */
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+  -fx-background-radius: 0;
+}
