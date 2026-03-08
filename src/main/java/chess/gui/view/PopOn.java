@@ -5,7 +5,6 @@ import chess.game.logic.PieceType;
 import chess.game.state.GameState;
 import chess.gui.model.BoardInteractionManager;
 import chess.sound.SoundPlayer;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -69,10 +68,10 @@ public class PopOn extends PopOver {
 
   private PopOn(Node node) {
     super(node);
+    this.setArrowSize(0);
   }
 
   private static Node init(PopOnType type) {
-    FXMLLoader loader = null;
 
     switch (type) {
       case DRAW_OFFER:

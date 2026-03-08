@@ -64,6 +64,78 @@
   -fx-font-size: 130%;
 }
 
+#backButton {
+  -fx-background-image: url("../misc/back_light.png");
+  -fx-background-color: transparent;
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#backButton:pressed {
+  -fx-background-color: linear-gradient(to right, -lgreen-light, -lgreen-lighter);
+}
+
+#nextButton {
+  -fx-background-image: url("../misc/next_light.png");
+  -fx-background-color: transparent;
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#nextButton:pressed {
+  -fx-background-color: linear-gradient(to left, -lgreen-light, -lgreen-lighter);
+}
+
+#settingsButton {
+  -fx-background-image: url("../misc/settings_light.png");
+  -fx-background-color: transparent;
+  -fx-background-size: 50 50;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#settingsButton:pressed {
+  -fx-background-image: url("../misc/settings_light_raised.png");
+}
+
+#themeButton {
+  -fx-background-image: url("../misc/sun_light.png");
+  -fx-background-color: transparent;
+  -fx-background-size: 50 50;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#themeButton:hover {
+  -fx-background-image: url("../misc/sun_dark.png");
+}
+
+#themeButton:pressed {
+  -fx-background-image: url("../misc/sun_dark_raised.png");
+}
+
+#giveUpButton {
+  -fx-background-image: url("../misc/flag_light.png");
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#drawButton {
+  -fx-background-image: url("../misc/hands_light.png");
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
 /* ====== RADIO BUTTONS ====== */
 
 #whiteButton {

@@ -72,6 +72,78 @@
   -fx-background-color: linear-gradient(to bottom right, #d30b4d, #4f0147);
 }
 
+#backButton {
+  -fx-background-image: url("../misc/back_dark.png");
+  -fx-background-color: transparent;
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#backButton:pressed {
+  -fx-background-color: linear-gradient(to right, -combo-gradient-from, -purple-type);
+}
+
+#nextButton {
+  -fx-background-image: url("../misc/next_dark.png");
+  -fx-background-color: transparent;
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#nextButton:pressed {
+  -fx-background-color: linear-gradient(to left, -combo-gradient-from, -purple-type);
+}
+
+#settingsButton {
+  -fx-background-image: url("../misc/settings_dark.png");
+  -fx-background-color: transparent;
+  -fx-background-size: 50 50;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#settingsButton:pressed {
+  -fx-background-image: url("../misc/settings_dark_raised.png");
+}
+
+#themeButton {
+  -fx-background-image: url("../misc/moon_dark.png");
+  -fx-background-color: transparent;
+  -fx-background-size: 50 50;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#themeButton:hover {
+  -fx-background-image: url("../misc/moon_light.png");
+}
+
+#themeButton:pressed {
+  -fx-background-image: url("../misc/moon_light_raised.png");
+}
+
+#giveUpButton {
+  -fx-background-image: url("../misc/flag_dark.png");
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
+#drawButton {
+  -fx-background-image: url("../misc/hands_dark.png");
+  -fx-background-size: 70 70;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-alignment: center;
+}
+
 /* ====== RADIO BUTTONS ====== */
 
 #whiteButton {

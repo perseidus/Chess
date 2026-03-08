@@ -34,6 +34,9 @@ public class ScreenManager extends Application {
       String style = lightMode ? "/styles/light.css" : "/styles/dark.css";
       Parent root = FXMLLoader.load(ScreenManager.class.getResource(screen.getPath()));
       Scene scene = new Scene(root);
+      scene.getStylesheets().remove(ScreenManager.class.getResource("/styles/light.css").toExternalForm());
+      scene.getStylesheets().remove(ScreenManager.class.getResource("/styles/dark.css").toExternalForm());
+      scene.getStylesheets().add(ScreenManager.class.getResource("/styles/base.css").toExternalForm());
       scene.getStylesheets().add(ScreenManager.class.getResource(style).toExternalForm());
       stage.setScene(scene);
       stage.setResizable(false);
