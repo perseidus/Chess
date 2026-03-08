@@ -166,10 +166,12 @@ public class BoardInteractionManager {
   public void refresh() {
     resetInputs();
     updateClocks(gameSession.getWhiteTime(), gameSession.getBlackTime());
+    renderer.setGameSession(gameSession);
     renderer.refresh();
   }
 
   public void rerender() {
+    renderer.setGameSession(gameSession);
     renderer.refresh();
     if (selectedPieceMoves == null) {
       selectedPieceMoves = new ArrayList<>();
@@ -179,5 +181,9 @@ public class BoardInteractionManager {
 
   public GameSession getGameSession() {
     return gameSession;
+  }
+
+  public void setGameSession(GameSession gameSession) {
+    this.gameSession = gameSession;
   }
 }

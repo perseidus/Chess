@@ -48,9 +48,9 @@ public class ChessBoardController implements Initializable {
     innerHBox.prefWidthProperty().bind(minLength);
 
     renderer = new BoardRenderer(grid, drawButton, upperTimeLabel, lowerTimeLabel);
+    renderer.setGameSession(gameSession);
     manager = BoardInteractionManager.getInstance(renderer);
     gameSession = manager.getGameSession();
-    renderer.setGameSession(gameSession);
 
     String currentTime = BoardInteractionManager.formatTime(
         gameSession.getCurrentPlayerTime() * 60);

@@ -129,6 +129,7 @@ public class GameSession extends Thread {
       return;
     }
 
+    manager.setGameSession(this);
     manager.refresh();
 
     if (configs.isPvpMode()) {    //2 human players
