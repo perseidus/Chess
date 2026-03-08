@@ -33,19 +33,11 @@ public class ScreenManager extends Application {
   public static void switchScene(Screen screen) {
     currentScreen = screen;
     try {
-      String style = lightMode ? "/styles/light.css" : "/styles/dark.css";
       Parent root = FXMLLoader.load(ScreenManager.class.getResource(screen.getPath()));
       Scene scene = new Scene(root);
-      scene.getStylesheets().remove(ScreenManager.class.getResource("/styles/light.css").toExternalForm());
-      scene.getStylesheets().remove(ScreenManager.class.getResource("/styles/dark.css").toExternalForm());
-      scene.getStylesheets().add(ScreenManager.class.getResource("/styles/base.css").toExternalForm());
-      scene.getStylesheets().add(ScreenManager.class.getResource(style).toExternalForm());
+      setStylesheets(scene);
       stage.setScene(scene);
       stage.setResizable(false);
-
-      if (screen == Screen.CHESSBOARD) {
-
-      }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -68,6 +60,7 @@ public class ScreenManager extends Application {
           throw new RuntimeException(e);
         }
         Scene scene = new Scene(root);
+        setStylesheets(scene);
         popUpStage.setScene(scene);
         popUpStage.setX((stage.getX() + (stage.getWidth()) / 2) - 150);
         popUpStage.setY((stage.getY() + (stage.getHeight()) / 2) - 200);
@@ -79,8 +72,20 @@ public class ScreenManager extends Application {
     });
   }
 
+  private static void setStylesheets(Scene scene) {
+    String style = lightMode ? "/styles/light.css" : "/styles/dark.css";
+    scene.getStylesheets().remove(ScreenManager.class.getResource("/styles/light.css").toExternalForm());
+    scene.getStylesheets().remove(ScreenManager.class.getResource("/styles/dark.css").toExternalForm());
+    scene.getStylesheets().add(ScreenManager.class.getResource("/styles/base.css").toExternalForm());
+    scene.getStylesheets().add(ScreenManager.class.getResource(style).toExternalForm());
+  }
+
   public static void closeApplication() {
     stage.close();
+  }
+
+  public static Stage getMatchEndedStage() {
+    return popUpStage;
   }
 
   public static void closeMatchEndingPopUp() {

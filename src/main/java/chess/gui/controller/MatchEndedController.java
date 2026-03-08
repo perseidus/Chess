@@ -12,11 +12,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class MatchEndedController implements Initializable {
 
   @FXML
   Label topText, bottomText;
+
+  private double xOffset;
+  private double yOffset;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,4 +58,14 @@ public class MatchEndedController implements Initializable {
     ScreenManager.closeApplication();
   }
 
+  public void mousePressed(MouseEvent mouseEvent) {
+    xOffset = mouseEvent.getSceneX();
+    yOffset = mouseEvent.getSceneY();
+  }
+
+  public void mouseDragged(MouseEvent mouseEvent) {
+    Stage stage = ScreenManager.getMatchEndedStage();
+    stage.setX(mouseEvent.getScreenX() - xOffset);
+    stage.setY(mouseEvent.getScreenY() - yOffset);
+  }
 }

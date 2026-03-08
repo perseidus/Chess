@@ -127,3 +127,12 @@
 .scroll-bar .decrement-button {
   -fx-background-radius: 0;
 }
+
+/* ====== MATCH ENDING POP UP ====== */
+#rematchButton, #mainMenuButton, #quitGameButton {
+  -fx-font-size: 130%;
+}
+
+#rematchButton:hover, #mainMenuButton:hover, #quitGameButton:hover {
+  -fx-font-size: 140%;
+}
