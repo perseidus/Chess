@@ -17,6 +17,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.PopOver.ArrowLocation;
 
@@ -24,6 +27,8 @@ public class ChooseGameController implements Initializable {
 
   private MatchConfiguration config;
 
+  @FXML
+  AnchorPane pane;
   @FXML
   ToggleGroup colorButtonGroup;
   @FXML
@@ -54,6 +59,8 @@ public class ChooseGameController implements Initializable {
       colonLabel3.setDisable(true);
       computerBox.setDisable(true);
     }
+
+    pane.addEventFilter(KeyEvent.KEY_PRESSED, this::keyPressedFallback);
   }
 
   public void settingsClicked() {
@@ -77,6 +84,31 @@ public class ChooseGameController implements Initializable {
     GameState.getInstance().loadMatchConfiguration();
     ScreenManager.switchScene(Screen.CHESSBOARD);
     SoundPlayer.getInstance().playSound(Sound.CLICK);
+  }
+
+  public void keyPressedFallback(KeyEvent event) {
+    KeyCode key = event.getCode();
+    System.out.println(key);
+
+    if (key == KeyCode.TAB) {
+      if (timeBox.isFocused()) {
+        incrementBox.requestFocus();
+      } else if (incrementBox.isFocused() && !computerBox.isDisable()) {
+        computerBox.requestFocus();
+      } else {
+        timeBox.requestFocus();
+      }
+    }
+
+    if (event.isControlDown() || event.isAltDown()) {
+      if (key == KeyCode.RIGHT) {
+        ScreenManager.switchScene(Screen.CHESSBOARD);
+      } else if (key == KeyCode.LEFT) {
+        ScreenManager.switchScene(Screen.START);
+      }
+    }
+
+    event.consume();
   }
 
   public void saveChanges() {

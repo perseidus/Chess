@@ -3,15 +3,18 @@ package chess.gui.view;
 import chess.game.engine.GameSession;
 import chess.game.logic.PieceType;
 import chess.game.state.GameState;
+import chess.gui.controller.KeyBoardInteraction;
 import chess.gui.model.BoardInteractionManager;
 import chess.sound.SoundPlayer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -72,21 +75,32 @@ public class PopOn extends PopOver {
   }
 
   private static Node init(PopOnType type) {
+    Node node = null;
 
     switch (type) {
       case DRAW_OFFER:
-        return initDrawOfferView();
+        node = initDrawOfferView();
+        break;
       case DRAW_ACCEPT:
-        return initDrawAcceptView();
-      case FORFEIT:
-        return initForfeitView();
+        node = initDrawAcceptView();
+        break;
+        case FORFEIT:
+        node = initForfeitView();
+        break;
       case CHOOSE_PIECE:
-        return initChoosePieceView();
+        node = initChoosePieceView();
+        break;
       case SETTINGS:
-        return initSettingsView();
-
+        node = initSettingsView();
+        break;
     }
-    return null;
+
+    if (node != null) {
+      KeyBoardInteraction interaction = new KeyBoardInteraction((Parent) node);
+      node.addEventFilter(KeyEvent.KEY_PRESSED, interaction::catchKeyPress);
+    }
+
+    return node;
   }
 
   private static Node initDrawOfferView() {
@@ -237,6 +251,10 @@ public class PopOn extends PopOver {
     Button b2 = new Button();
     Button b3 = new Button();
     Button b4 = new Button();
+    b1.setId("b1");
+    b2.setId("b3");
+    b3.setId("b2");
+    b4.setId("b4");
     double width = stack1.getWidth();
     double height = stack1.getHeight();
     b1.setPrefSize(width, height);
@@ -275,7 +293,9 @@ public class PopOn extends PopOver {
     box.getChildren().add(hbox2);
 
     ToggleSwitch switch1 = new ToggleSwitch("Play sounds");
+    switch1.setId("b1");
     ToggleSwitch switch2 = new ToggleSwitch("Highlight moves");
+    switch2.setId("b2");
     switch1.setSelected(toggle1);
     switch2.setSelected(toggle2);
     switch1.selectedProperty().addListener((o, oValue, nValue) -> {

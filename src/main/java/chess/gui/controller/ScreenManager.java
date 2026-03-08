@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -45,6 +46,9 @@ public class ScreenManager extends Application {
       }
       lastScene = scene;
 
+      KeyBoardInteraction interaction = new KeyBoardInteraction(scene.getRoot());
+      scene.addEventFilter(KeyEvent.KEY_PRESSED, interaction::catchKeyPress);
+
       setStylesheets(scene);
       stage.setScene(scene);
     } catch (IOException e) {
@@ -70,6 +74,10 @@ public class ScreenManager extends Application {
         }
         Scene scene = new Scene(root);
         setStylesheets(scene);
+
+        KeyBoardInteraction interaction = new KeyBoardInteraction(scene.getRoot());
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, interaction::catchKeyPress);
+
         popUpStage.setScene(scene);
         popUpStage.setX((stage.getX() + (stage.getWidth()) / 2) - 150);
         popUpStage.setY((stage.getY() + (stage.getHeight()) / 2) - 200);
@@ -87,6 +95,10 @@ public class ScreenManager extends Application {
     scene.getStylesheets().remove(ScreenManager.class.getResource("/styles/dark.css").toExternalForm());
     scene.getStylesheets().add(ScreenManager.class.getResource("/styles/base.css").toExternalForm());
     scene.getStylesheets().add(ScreenManager.class.getResource(style).toExternalForm());
+  }
+
+  public static void toggleMaximized() {
+    stage.setMaximized(!stage.isMaximized());
   }
 
   public static void closeApplication() {
