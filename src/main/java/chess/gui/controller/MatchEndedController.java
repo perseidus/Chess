@@ -8,7 +8,6 @@ import chess.sound.Sound;
 import chess.sound.SoundPlayer;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -30,7 +29,7 @@ public class MatchEndedController implements Initializable {
     bottomText.setText(GameSession.secondaryMessage);
   }
 
-  public void rematchClicked(ActionEvent actionEvent) {
+  public void rematchClicked() {
     ScreenManager.closeMatchEndingPopUp();
     MatchConfiguration config = MatchConfiguration.getInstance();
     GameState gameState = GameState.getInstance();
@@ -47,13 +46,13 @@ public class MatchEndedController implements Initializable {
     SoundPlayer.getInstance().playSound(Sound.CLICK);
   }
 
-  public void mainMenuClicked(ActionEvent actionEvent) {
+  public void mainMenuClicked() {
     ScreenManager.closeMatchEndingPopUp();
     ScreenManager.switchScene(Screen.START);
     SoundPlayer.getInstance().playSound(Sound.CLICK);
   }
 
-  public void quitGameClicked(ActionEvent actionEvent) {
+  public void quitGameClicked() {
     ScreenManager.closeMatchEndingPopUp();
     ScreenManager.closeApplication();
   }

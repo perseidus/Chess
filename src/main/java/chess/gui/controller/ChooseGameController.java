@@ -10,7 +10,6 @@ import chess.sound.Sound;
 import chess.sound.SoundPlayer;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -57,23 +56,23 @@ public class ChooseGameController implements Initializable {
     }
   }
 
-  public void settingsClicked(ActionEvent actionEvent) {
+  public void settingsClicked() {
     PopOver popOver = PopOn.getInstance(PopOnType.SETTINGS);
     popOver.setArrowLocation(ArrowLocation.TOP_LEFT);
     popOver.setDetachable(false);
     popOver.show(settingsButton);
   }
 
-  public void themeClicked(ActionEvent actionEvent) {
+  public void themeClicked() {
     ScreenManager.switchTheme();
   }
 
-  public void backClicked(ActionEvent actionEvent) {
+  public void backClicked() {
     saveChanges();
     ScreenManager.switchScene(Screen.START);
   }
 
-  public void nextClicked(ActionEvent actionEvent) {
+  public void nextClicked() {
     saveChanges();
     GameState.getInstance().loadMatchConfiguration();
     ScreenManager.switchScene(Screen.CHESSBOARD);

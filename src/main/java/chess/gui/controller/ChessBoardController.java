@@ -79,7 +79,7 @@ public class ChessBoardController implements Initializable {
     }
   }
 
-  public void drawClicked(ActionEvent actionEvent) {
+  public void drawClicked() {
     if (gameSession.enemyOfferedDraw()) {
       popOver = PopOn.getInstance(PopOnType.DRAW_ACCEPT, gameSession);
     } else {
@@ -90,21 +90,21 @@ public class ChessBoardController implements Initializable {
     popOver.show(drawButton);
   }
 
-  public void giveUpClicked(ActionEvent actionEvent) {
+  public void giveUpClicked() {
     popOver = PopOn.getInstance(PopOnType.FORFEIT, gameSession);
     popOver.setArrowLocation(ArrowLocation.RIGHT_BOTTOM);
     popOver.setDetachable(false);
     popOver.show(giveUpButton);
   }
 
-  public void settingsClicked(ActionEvent actionEvent) {
+  public void settingsClicked() {
     popOver = PopOn.getInstance(PopOnType.SETTINGS, gameSession);
     popOver.setArrowLocation(ArrowLocation.TOP_LEFT);
     popOver.setDetachable(false);
     popOver.show(settingsButton);
   }
 
-  public void themeClicked(ActionEvent actionEvent) {
+  public void themeClicked() {
     ScreenManager.switchTheme();
     renderer.refresh();
   }
