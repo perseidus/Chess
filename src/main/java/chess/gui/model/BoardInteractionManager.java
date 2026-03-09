@@ -10,6 +10,7 @@ import chess.game.logic.SpecialMoveType;
 import chess.game.state.GameState;
 import chess.gui.view.BoardRenderer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -68,9 +69,7 @@ public class BoardInteractionManager {
   }
 
   public void resetInputs() {
-    selectedPiecePos = null;
-    pieceSelected = false;
-    selectedPieceMoves = null;
+    deselect();
     moves = null;
     possibleMoves = null;
   }
@@ -91,7 +90,13 @@ public class BoardInteractionManager {
   }
 
   private void friendlySquareClicked(int i, int j) {
-    selectedPiecePos = new int[]{i, j};
+    int[] newPos = new int[]{i, j};
+    if (Arrays.equals(selectedPiecePos, newPos)) {
+      deselect(i, j);
+      return;
+    }
+
+    selectedPiecePos = newPos;
     selectedPieceMoves = moves.get("" + i + j);
     pieceSelected = true;
     possibleMoves = BoardGenerator.movesToBitboardBoolean(selectedPieceMoves);
@@ -106,6 +111,11 @@ public class BoardInteractionManager {
   //  returns true if promotion
   private boolean emptyOrEnemySquareClicked(int i, int j, PieceType type) {
     if (!pieceSelected) {
+      return false;
+    }
+
+    if (Arrays.equals(selectedPiecePos, new int[]{i, j})) {
+      deselect(i, j);
       return false;
     }
 
@@ -128,7 +138,21 @@ public class BoardInteractionManager {
 
       gameSession.sendMove(move);
     }
+
+    deselect(i, j);
     return false;
+  }
+
+  private void deselect() {
+    selectedPiecePos = null;
+    pieceSelected = false;
+    selectedPieceMoves = null;
+    renderer.removeButtonGraphics();
+    renderer.drawLastMove(false, "");
+  }
+
+  private void deselect(int i, int j) {
+    deselect();
   }
 
   public void updateClocks(int whiteTime, int blackTime) {

@@ -161,7 +161,7 @@ public class BoardRenderer {
       public void run() {
         String id;
 
-        if (showMoves) {
+        if (showMoves && moveOnBoard != null) {
           for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
               int move = moveOnBoard[i][j]; // 0 -> no move, 1 -> regular move, 2 -> en passant
@@ -180,7 +180,7 @@ public class BoardRenderer {
         }
         id = "a" + y + x;
         if (!id.equals("a-1-1")) {
-          drawLastMove(true, id);
+          drawLastMove(moveOnBoard != null, id);
           buttons.get(id).setStyle("-fx-background-color: " + Parameters.moveToColor() + ";");
           drawChecks();
         }

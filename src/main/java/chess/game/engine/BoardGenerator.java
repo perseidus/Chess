@@ -76,6 +76,10 @@ public class BoardGenerator {
   public static int[][] movesToBitboard(List<Move> moves) {
     int[][] pieceAttacksSquare = new int[8][8];
 
+    if (moves == null) {
+      return null;
+    }
+
     for (Move move : moves) {
       if (move.getMoveType() == SpecialMoveType.EN_PASSANT) {
         pieceAttacksSquare[move.getTo()[0]][move.getTo()[1]] = 2;
