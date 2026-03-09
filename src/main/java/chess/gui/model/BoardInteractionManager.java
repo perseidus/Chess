@@ -92,7 +92,7 @@ public class BoardInteractionManager {
   private void friendlySquareClicked(int i, int j) {
     int[] newPos = new int[]{i, j};
     if (Arrays.equals(selectedPiecePos, newPos)) {
-      deselect(i, j);
+      deselect();
       return;
     }
 
@@ -115,7 +115,7 @@ public class BoardInteractionManager {
     }
 
     if (Arrays.equals(selectedPiecePos, new int[]{i, j})) {
-      deselect(i, j);
+      deselect();
       return false;
     }
 
@@ -139,7 +139,7 @@ public class BoardInteractionManager {
       gameSession.sendMove(move);
     }
 
-    deselect(i, j);
+    deselect();
     return false;
   }
 
@@ -149,10 +149,6 @@ public class BoardInteractionManager {
     selectedPieceMoves = null;
     renderer.removeButtonGraphics();
     renderer.drawLastMove(false, "");
-  }
-
-  private void deselect(int i, int j) {
-    deselect();
   }
 
   public void updateClocks(int whiteTime, int blackTime) {
