@@ -16,6 +16,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,6 +30,8 @@ public class ChessBoardController implements Initializable {
   private BoardInteractionManager manager;
 
   @FXML
+  AnchorPane pane;
+  @FXML
   GridPane grid;
   @FXML
   Button drawButton, giveUpButton, settingsButton;
@@ -36,6 +41,7 @@ public class ChessBoardController implements Initializable {
   VBox outerVBox;
   @FXML
   Label upperTimeLabel, lowerTimeLabel;
+
   PopOn popOver;
 
   private GameSession gameSession;
@@ -62,6 +68,8 @@ public class ChessBoardController implements Initializable {
     if (!MatchConfiguration.getInstance().isPvpMode()) {
       drawButton.setDisable(true);
     }
+
+    pane.addEventFilter(KeyEvent.KEY_PRESSED, this::keyPressedFallback);
   }
 
   public void squareClicked(ActionEvent actionEvent) {
@@ -69,6 +77,8 @@ public class ChessBoardController implements Initializable {
     String id = b.getId();
     boolean promotion = manager.handleButtonClick(id.charAt(2) - '0', id.charAt(1) - '0',
         PieceType.NONE);
+
+    manager.removeTileFocus();
 
     if (promotion) {
       popOver = PopOn.getInstance(PopOnType.CHOOSE_PIECE, manager, id.charAt(2) - '0',
@@ -107,5 +117,25 @@ public class ChessBoardController implements Initializable {
   public void themeClicked() {
     ScreenManager.switchTheme();
     renderer.refresh();
+  }
+
+  private void keyPressedFallback(KeyEvent event) {
+    KeyCode key = event.getCode();
+
+    if (key == KeyCode.LEFT) {
+      manager.moveTileFocus(0, -1);
+    } else if (key == KeyCode.RIGHT) {
+      manager.moveTileFocus(0, 1);
+    } else if (key == KeyCode.UP) {
+      manager.moveTileFocus(-1, 0);
+    } else if (key == KeyCode.DOWN) {
+      manager.moveTileFocus(1, 0);
+    } else if (key == KeyCode.ENTER) {
+      manager.enterFocusedTile();
+    } else if (key == KeyCode.ESCAPE) {
+      manager.removeTileFocus();
+    }
+
+    event.consume();
   }
 }

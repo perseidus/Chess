@@ -8,11 +8,15 @@ import chess.game.logic.Piece;
 import chess.game.logic.PieceType;
 import chess.game.logic.SpecialMoveType;
 import chess.game.state.GameState;
+import chess.game.state.MatchConfiguration;
 import chess.gui.view.BoardRenderer;
+import chess.gui.view.PopOn;
+import chess.gui.view.PopOnType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import org.controlsfx.control.PopOver.ArrowLocation;
 
 public class BoardInteractionManager {
 
@@ -31,6 +35,13 @@ public class BoardInteractionManager {
 
   private int currentI, currentJ;
   private boolean[][] currentSquareEnemy;
+
+  private boolean tileFocused = false;
+  private int focusedI = -1, focusedJ = -1;
+
+  public static BoardInteractionManager getInstance() {
+    return instance;
+  }
 
   public static BoardInteractionManager getInstance(BoardRenderer renderer) {
     if (instance == null) {
@@ -143,6 +154,38 @@ public class BoardInteractionManager {
     return false;
   }
 
+  public void moveTileFocus(int offI, int offJ) {
+    tileFocused = true;
+
+    if (focusedI == -1 || focusedJ == -1) {
+      focusedI = 4;
+      focusedJ = 4;
+    } else {
+      focusedI = Math.floorMod(focusedI + offI, 8);
+      focusedJ = Math.floorMod(focusedJ + offJ, 8);
+    }
+
+    renderer.drawFocusedTile(focusedI, focusedJ);
+  }
+
+  public void removeTileFocus() {
+    tileFocused = false;
+    renderer.drawFocusedTile(-1, -1);
+  }
+
+  public void enterFocusedTile() {
+    if (tileFocused) {
+      boolean promotion = handleButtonClick(focusedI, focusedJ, PieceType.NONE);
+
+      if (promotion) {
+        PopOn popOver = PopOn.getInstance(PopOnType.CHOOSE_PIECE, this, focusedI, focusedJ);
+        popOver.setDetachable(false);
+        popOver.setArrowLocation(ArrowLocation.TOP_LEFT);
+        popOver.show(renderer.getButton("a" + focusedJ + focusedI));
+      }
+    }
+  }
+
   private void deselect() {
     selectedPiecePos = null;
     pieceSelected = false;
@@ -184,6 +227,11 @@ public class BoardInteractionManager {
   }
 
   public void refresh() {
+    if (MatchConfiguration.getInstance().isPvpMode()) {
+      focusedI = -1;
+      focusedJ = -1;
+    }
+
     resetInputs();
     updateClocks(gameSession.getWhiteTime(), gameSession.getBlackTime());
     renderer.setGameSession(gameSession);
@@ -205,5 +253,17 @@ public class BoardInteractionManager {
 
   public void setGameSession(GameSession gameSession) {
     this.gameSession = gameSession;
+  }
+
+  public boolean isTileFocused() {
+    return tileFocused;
+  }
+
+  public int getFocusedI() {
+    return focusedI;
+  }
+
+  public int getFocusedJ() {
+    return focusedJ;
   }
 }

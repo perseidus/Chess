@@ -7,6 +7,7 @@ import chess.game.logic.Piece;
 import chess.game.state.GameState;
 import chess.game.state.MatchConfiguration;
 import chess.game.state.Parameters;
+import chess.gui.model.BoardInteractionManager;
 import java.util.HashMap;
 import java.util.List;
 import javafx.application.Platform;
@@ -18,6 +19,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 public class BoardRenderer {
 
@@ -142,12 +145,12 @@ public class BoardRenderer {
         if (gameState.isBlackKingInCheck()) {
           int[] blackKing = gameState.getBlackKingPos();
           id = "a" + blackKing[1] + blackKing[0];
-          buttons.get(id).setGraphic(NodeFactory.getCheckHighlight(images.get(id)));
+          mergeAddGraphics(id, NodeFactory.getCheckHighlight(images.get(id)));
         }
         if (gameState.isWhiteKingInCheck()) {
           int[] whiteKing = gameState.getWhiteKingPos();
           id = "a" + whiteKing[1] + whiteKing[0];
-          buttons.get(id).setGraphic(NodeFactory.getCheckHighlight(images.get(id)));
+          mergeAddGraphics(id, NodeFactory.getCheckHighlight(images.get(id)));
         }
       }
     });
@@ -167,13 +170,13 @@ public class BoardRenderer {
               int move = moveOnBoard[i][j]; // 0 -> no move, 1 -> regular move, 2 -> en passant
               if (move == 1 && enemySquare[i][j]) {
                 id = "a" + j + i;
-                buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
+                mergeAddGraphics(id, NodeFactory.getBigCircle(images.get(id)));
               } else if (move == 2) { // en passant: highlight square behind
                 id = "a" + j + i;
-                buttons.get(id).setGraphic(NodeFactory.getBigCircle(images.get(id)));
+                mergeAddGraphics(id, NodeFactory.getBigCircle(images.get(id)));
               } else if (move == 1) {
                 id = "a" + j + i;
-                buttons.get(id).setGraphic(NodeFactory.getSmallCircle(images.get(id)));
+                mergeAddGraphics(id, NodeFactory.getSmallCircle(images.get(id)));
               }
             }
           }
@@ -215,12 +218,47 @@ public class BoardRenderer {
     });
   }
 
+  public void drawFocusedTile(int i, int j) {
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        for (Button button : buttons.values()) {
+
+          Node graphic = button.getGraphic();
+
+          if (graphic instanceof StackPane) { // remove previous focus highlight
+            button.setGraphic(NodeFactory.extractCircle(graphic));
+          } else if (graphic instanceof Rectangle) {
+            button.setGraphic(null);
+          }
+        }
+
+        if (i != -1 && j != -1) {
+          Button button = buttons.get("a" + j + i);
+          Node graphic = button.getGraphic();
+          if (graphic != null) {
+            graphic = NodeFactory.addFocusToCircle(images.get("a" + j + i), (Circle) graphic);
+          } else {
+            graphic = NodeFactory.getFocusHighlight(images.get("a" + j + i));
+          }
+          button.setGraphic(graphic);
+        }
+
+        drawChecks();
+      }
+    });
+  }
+
   public void removeButtonGraphics() {
     Platform.runLater(new Runnable() {
       @Override
       public void run() {
         for (Button button : buttons.values()) {
-          button.setGraphic(null);
+          if (button.getGraphic() instanceof StackPane || button.getGraphic() instanceof Rectangle) {
+            button.setGraphic(NodeFactory.getFocusHighlight(images.get(button.getId())));
+          } else {
+            button.setGraphic(null);
+          }
           button.setStyle("-fx-background-color: transparent;");
         }
       }
@@ -237,6 +275,16 @@ public class BoardRenderer {
     });
   }
 
+  private void mergeAddGraphics(String id, Circle circle) {
+    Button button = buttons.get(id);
+
+    if (button.getGraphic() != null) {
+      button.setGraphic(NodeFactory.addFocusToCircle(images.get(id), circle));
+    } else {
+      button.setGraphic(circle);
+    }
+  }
+
   private void enableDrawButton() {
     if (!configs.isPvpMode() || gameState.getLastMove() == null) {
       drawButton.setDisable(true);
@@ -251,6 +299,11 @@ public class BoardRenderer {
   }
 
   public void refresh() {
+    BoardInteractionManager manager = BoardInteractionManager.getInstance();
+    if (manager != null && manager.isTileFocused()) {
+      drawFocusedTile(manager.getFocusedI(), manager.getFocusedJ());
+    }
+
     removeButtonGraphics();
     drawPieces();
     drawLastMove(false, "");
@@ -260,5 +313,9 @@ public class BoardRenderer {
 
   public void setGameSession(GameSession gameSession) {
     this.gameSession = gameSession;
+  }
+
+  public Button getButton(String id) {
+    return buttons.get(id);
   }
 }
