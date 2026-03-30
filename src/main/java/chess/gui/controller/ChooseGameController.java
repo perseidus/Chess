@@ -88,7 +88,6 @@ public class ChooseGameController implements Initializable {
 
   public void keyPressedFallback(KeyEvent event) {
     KeyCode key = event.getCode();
-    System.out.println(key);
 
     if (key == KeyCode.TAB) {
       if (timeBox.isFocused()) {

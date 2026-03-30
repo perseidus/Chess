@@ -77,6 +77,7 @@ public class BoardInteractionManager {
   public void waitForMove() {
     pieces = gameState.getBoard();
     moves = MoveGenerator.getPossibleMoves(pieces);
+    renderer.refreshDragDrop();
   }
 
   public void resetInputs() {
@@ -265,5 +266,16 @@ public class BoardInteractionManager {
 
   public int getFocusedJ() {
     return focusedJ;
+  }
+
+  public String getSelectedId() {
+    if (pieceSelected && selectedPiecePos != null) {
+      return "a" + selectedPiecePos[1] + selectedPiecePos[0];
+    }
+    return null;
+  }
+
+  public List<Move> getSelectedPieceMoves() {
+    return selectedPieceMoves;
   }
 }

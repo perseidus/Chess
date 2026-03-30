@@ -30,8 +30,8 @@ public class Parameters {
   private static String moveFromColorD = "rgba(90, 167, 134, 0.25)";
   private static String moveToColorD = "rgba(42, 157, 143, 0.25)";
 
-  private static Color focusHighlightColorL = new Color(0.89, 0.04, 0.36, 1);
-  private static Color focusHighlightColorD = new Color(0.89, 0.04, 0.36, 1);
+  private static Color focusHighlightColor = new Color(0.89, 0.04, 0.36, 1);
+  private static String dragToColor = "rgba(227, 10, 92, 0.4)";
 
   private static String lightTileL = "#fbf8f3";
   private static String darkTileL = "#8fc9a8";
@@ -47,6 +47,10 @@ public class Parameters {
     return ScreenManager.isLightMode() ? moveToColorL : moveToColorD;
   }
 
+  public static String dragToColor() {
+    return dragToColor;
+  }
+
   public static Color moveHighlightColor() {
     return ScreenManager.isLightMode() ? moveHighlightColorL : moveHighlightColorD;
   }
@@ -56,7 +60,7 @@ public class Parameters {
   }
 
   public static Color focusHighlightColor() {
-    return ScreenManager.isLightMode() ? focusHighlightColorL : focusHighlightColorD;
+    return focusHighlightColor;
   }
 
   public static String darkTile() {

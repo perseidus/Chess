@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -70,6 +71,10 @@ public class ChessBoardController implements Initializable {
     }
 
     pane.addEventFilter(KeyEvent.KEY_PRESSED, this::keyPressedFallback);
+    pane.setOnDragOver(e -> {
+      e.acceptTransferModes(TransferMode.ANY);
+      e.consume();
+    });
   }
 
   public void squareClicked(ActionEvent actionEvent) {
@@ -122,13 +127,13 @@ public class ChessBoardController implements Initializable {
   private void keyPressedFallback(KeyEvent event) {
     KeyCode key = event.getCode();
 
-    if (key == KeyCode.LEFT) {
+    if (key == KeyCode.LEFT || key == KeyCode.A) {
       manager.moveTileFocus(0, -1);
-    } else if (key == KeyCode.RIGHT) {
+    } else if (key == KeyCode.RIGHT || key == KeyCode.D) {
       manager.moveTileFocus(0, 1);
-    } else if (key == KeyCode.UP) {
+    } else if (key == KeyCode.UP || key == KeyCode.W) {
       manager.moveTileFocus(-1, 0);
-    } else if (key == KeyCode.DOWN) {
+    } else if (key == KeyCode.DOWN || key == KeyCode.S) {
       manager.moveTileFocus(1, 0);
     } else if (key == KeyCode.ENTER) {
       manager.enterFocusedTile();

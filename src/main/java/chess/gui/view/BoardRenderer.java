@@ -7,6 +7,7 @@ import chess.game.logic.Piece;
 import chess.game.state.GameState;
 import chess.game.state.MatchConfiguration;
 import chess.game.state.Parameters;
+import chess.gui.controller.DragDropManager;
 import chess.gui.model.BoardInteractionManager;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ public class BoardRenderer {
   private GameState gameState;
   private MatchConfiguration configs;
   private GameSession gameSession;
+  private DragDropManager dragDropManager;
 
   private GridPane gridPane;
   private Button drawButton;
@@ -56,6 +58,8 @@ public class BoardRenderer {
       ImageView image = (ImageView) ((StackPane) node).getChildren().get(0);
       images.put(button.getId(), image);
     }
+
+    this.dragDropManager = new DragDropManager(buttons);
 
     if (gameState.getLastMove() == null) {
       drawButton.setDisable(true);
@@ -309,6 +313,12 @@ public class BoardRenderer {
     drawLastMove(false, "");
     drawChecks();
     enableDrawButton();
+    refreshDragDrop();
+  }
+
+  public void refreshDragDrop() {
+    dragDropManager.removeDraggable(buttons);
+    dragDropManager.setDraggable(buttons, images, pieces);
   }
 
   public void setGameSession(GameSession gameSession) {

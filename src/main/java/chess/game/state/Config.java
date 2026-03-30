@@ -17,10 +17,10 @@ public class Config {
       Map.entry(KeyCode.NUMPAD2, Set.of("vsPlayerButton", "randomButton", "mainMenuButton", "b2")),
       Map.entry(KeyCode.NUMPAD3, Set.of("quitGameButton", "blackButton", "b3")),
       Map.entry(KeyCode.NUMPAD4, Set.of("b4")),
-      Map.entry(KeyCode.S, Set.of("settingsButton")),
+      Map.entry(KeyCode.P, Set.of("settingsButton")),
       Map.entry(KeyCode.T, Set.of("themeButton")),
       Map.entry(KeyCode.F, Set.of("giveUpButton")),
-      Map.entry(KeyCode.D, Set.of("drawButton")),
+      Map.entry(KeyCode.L, Set.of("drawButton")),
       Map.entry(KeyCode.ENTER, Set.of("vsComputerButton", "nextButton"))
   );
 
