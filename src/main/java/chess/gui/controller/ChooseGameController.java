@@ -99,6 +99,12 @@ public class ChooseGameController implements Initializable {
       }
     }
 
+    if (key == KeyCode.UP) {
+      scrollIfFocused(true);
+    } else if (key == KeyCode.DOWN) {
+      scrollIfFocused(false);
+    }
+
     if (event.isControlDown() || event.isAltDown()) {
       if (key == KeyCode.RIGHT) {
         ScreenManager.switchScene(Screen.CHESSBOARD);
@@ -108,6 +114,26 @@ public class ChooseGameController implements Initializable {
     }
 
     event.consume();
+  }
+
+  private void scrollIfFocused(boolean scrollUp) {
+    ComboBox<String> box = null;
+
+    if (incrementBox.isFocused()) {
+      box = incrementBox;
+    } else if (computerBox.isFocused()) {
+      box = computerBox;
+    } else if (timeBox.isFocused()) {
+      box = timeBox;
+    }
+
+    if (box != null) {
+      if (scrollUp) {
+        box.getSelectionModel().selectPrevious();
+      } else {
+        box.getSelectionModel().selectNext();
+      }
+    }
   }
 
   public void saveChanges() {
