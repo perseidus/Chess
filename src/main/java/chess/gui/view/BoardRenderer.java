@@ -26,6 +26,7 @@ import javafx.scene.shape.Rectangle;
 public class BoardRenderer {
 
   public static boolean showMoves = true;
+  public static boolean showLastMove = true;
 
   private GameState gameState;
   private MatchConfiguration configs;
@@ -207,12 +208,14 @@ public class BoardRenderer {
           button.setStyle("-fx-background-color: transparent;");
         }
 
-        buttons.get("a" + lastMove.getFrom()[1] + lastMove.getFrom()[0])
-            .setStyle("-fx-background-color: " + Parameters.moveFromColor() + "; "
-                + "-fx-border-radius: 0;");
-        buttons.get("a" + lastMove.getTo()[1] + lastMove.getTo()[0])
-            .setStyle("-fx-background-color: " + Parameters.moveToColor() + "; "
-                + "-fx-border-radius: 0;");
+        if (showLastMove) {
+          buttons.get("a" + lastMove.getFrom()[1] + lastMove.getFrom()[0])
+              .setStyle("-fx-background-color: " + Parameters.moveFromColor() + "; "
+                  + "-fx-border-radius: 0;");
+          buttons.get("a" + lastMove.getTo()[1] + lastMove.getTo()[0])
+              .setStyle("-fx-background-color: " + Parameters.moveToColor() + "; "
+                  + "-fx-border-radius: 0;");
+        }
 
         if (pieceSelected) {
           buttons.get(id).setStyle("-fx-background-color: " + Parameters.moveToColor() + "; "

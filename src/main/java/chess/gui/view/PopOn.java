@@ -31,7 +31,7 @@ public class PopOn extends PopOver {
   private static BoardInteractionManager manager;
 
   private static int i, j;
-  private static boolean toggle1 = true, toggle2 = true;
+  private static boolean toggle1 = true, toggle2 = true, toggle3 = true;
 
   public static PopOn getInstance(PopOnType type, GameSession session) {
     if (instance != null) {
@@ -293,13 +293,20 @@ public class PopOn extends PopOver {
     hbox2.setAlignment(Pos.CENTER_RIGHT);
     hbox2.setPadding(new Insets(10, 20, 10, 20));
     box.getChildren().add(hbox2);
+    HBox hbox3 = new HBox();
+    hbox3.setAlignment(Pos.CENTER_RIGHT);
+    hbox3.setPadding(new Insets(10, 20, 10, 20));
+    box.getChildren().add(hbox3);
 
     ToggleSwitch switch1 = new ToggleSwitch("Play sounds");
     switch1.setId("b1");
     ToggleSwitch switch2 = new ToggleSwitch("Highlight moves");
     switch2.setId("b2");
-    switch1.setSelected(toggle1);
-    switch2.setSelected(toggle2);
+    ToggleSwitch switch3 = new ToggleSwitch("Show last move");
+    switch3.setId("b3");
+    switch1.setSelected(true);
+    switch2.setSelected(true);
+    switch3.setSelected(true);
     switch1.selectedProperty().addListener((o, oValue, nValue) -> {
       toggle1 = nValue;
       SoundPlayer.playEnabled = toggle1;
@@ -308,8 +315,13 @@ public class PopOn extends PopOver {
       toggle2 = nValue;
       BoardRenderer.showMoves = toggle2;
     });
+    switch3.selectedProperty().addListener((o, oValue, nValue) -> {
+      toggle3 = nValue;
+      BoardRenderer.showLastMove = toggle3;
+    });
     hbox1.getChildren().add(switch1);
     hbox2.getChildren().add(switch2);
+    hbox3.getChildren().add(switch3);
 
     return box;
   }
